@@ -1,0 +1,96 @@
+/* Tipografia */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+/* Margenes y Paddings iniciales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilos de texto */
+
+.h1-estilo {
+  color: #223475;
+  font-size: 30px;
+}
+
+.p-estilo {
+  color: #8e8e8e;
+  font-size: 14px;
+}
+
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+.h-custom {
+height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+.h-custom {
+height: 90%;
+}
+}
+
+.carrito-logo {
+  font-size: 110px;
+  margin-right: 40px;
+}
+
+.muestra-multas .h2-estilo {
+  color: #223475;
+  font-size: 25px;
+  margin-top: 90px;
+}
+
+.detalle-infraccion .h2-estilo {
+    color: #223475;
+    font-size: 25px;
+    margin-top: 40px;
+  }
+
+#logoLogin{
+  width: 100%;
+}
+
+.login-form{
+  margin-top: 100px;
+}
+
+
+/* Estructura */
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+.detalle-infraccion{
+    margin-bottom: 90px;
+}
+
+@media only screen and (max-width: 767px) {
+
+  .h1-estilo {
+    font-weight: 600;
+    color: #223475;
+    font-size: 30px;
+  }
+
+  .muestra-multas .h2-estilo {
+    font-weight: 600;
+    color: #223475;
+    font-size: 25px;
+  }
+
+  .p-estilo {
+    color: #8e8e8e;
+    font-size: 16px;
+  }
+
+  .login-form{
+    margin-top: 30px;
+  }
+}

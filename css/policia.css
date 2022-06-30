@@ -1,0 +1,101 @@
+/* Tipografia */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+/* Margenes y Paddings iniciales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilos de texto */
+
+.h1-estilo {
+  font-weight: 600;
+  color: #223475;
+  font-size: 34px;
+}
+
+.p-estilo {
+  color: #8e8e8e;
+  font-size: 18px;
+}
+
+.carrito-logo {
+  font-size: 110px;
+  margin-right: 40px;
+}
+
+.muestra-multas .h2-estilo {
+  font-weight: 600;
+  color: #223475;
+  font-size: 27px;
+  margin-top: 90px;
+}
+
+.detalle-infraccion .h2-estilo {
+    font-weight: 600;
+    color: #223475;
+    font-size: 27px;
+    margin-top: 40px;
+  }
+
+/* Estructura */
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+main {
+  margin-top: 75px;
+}
+
+.detalle-infraccion{
+    margin-bottom: 90px;
+}
+
+footer {
+  margin-top: 120px;
+}
+
+footer p {
+  text-decoration: none;
+  color: #ffffff;
+  margin-top: 80px;
+}
+
+footer a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+footer a:hover {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+@media only screen and (max-width: 767px) {
+  footer {
+    margin-top: 150px;
+  }
+
+  .carrito-logo {
+    font-size: 108px;
+  }
+
+  .h1-estilo {
+    font-weight: 600;
+    color: #223475;
+    font-size: 30px;
+  }
+
+  .muestra-multas .h2-estilo {
+    font-weight: 600;
+    color: #223475;
+    font-size: 25px;
+  }
+
+  .p-estilo {
+    color: #8e8e8e;
+    font-size: 16px;
+  }
+}
