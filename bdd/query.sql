@@ -18,8 +18,7 @@ create table svp_multas_registradas
     marca varchar(20) not null,
     color varchar(20) not null,
     lugarInfraccion varchar(50) not null,
-    montoInfraccion numeric(10,2),
-    montoConDescuento numeric(10,2),
+    idTipoMultaFk int not null,
     fotografiaRuta varchar(100),
     fechaMulta varchar(20) not null,
     mesMulta varchar(5) not null,
@@ -36,6 +35,17 @@ create table svp_usuarios
     cuiNit varchar(14) not null,
     usuarioRegistrado varchar(10) not null,
     rolUsuarioRegistrado varchar(10) not null
+);
+
+
+
+-- creamos tabla para los tipos de multas
+create table svp_tipos_de_multas
+(
+	idTipoMulta int primary key not null AUTO_INCREMENT,
+    nombreTipoMulta varchar(100) not null,
+    montoInfraccion numeric(10,2) not null,
+    montoConDescuento numeric(10,2) not null
 );
 
 
@@ -81,7 +91,6 @@ DELIMITER ;
 
 
 
-
 -- procedimiento para mostrar todas las multas en la tabla svp_multas_registradas
 DELIMITER //
 CREATE PROCEDURE verTodasLasMultas()
@@ -92,6 +101,7 @@ DELIMITER ;
 
 
 
+
 -- procedimiento para mostrar todas las multas registradas
 DELIMITER //
 CREATE PROCEDURE verTodasLasMultasRegistradas()
@@ -99,7 +109,6 @@ BEGIN
 	SELECT COUNT(*) AS TOTAL_MULTAS_REGISTRADAS FROM svp_multas_registradas;
 END //
 DELIMITER ;
-
 
 
 
@@ -123,8 +132,6 @@ BEGIN
 	SELECT * FROM svp_multas_registradas WHERE estadoDeLaMulta = 'PENDIENTE';
 END //
 DELIMITER ;
-
-
 
 
 
@@ -162,7 +169,6 @@ BEGIN
 	SELECT COUNT(*) AS TOTAL_MULTAS_PENDIENTES_PAGO FROM svp_multas_registradas WHERE estadoDeLaMulta = 'PENDIENTE';
 END //
 DELIMITER ;
-
 
 
 
@@ -210,11 +216,13 @@ DELIMITER ;
 
 
 
+
+
 -- procedimiento para mostrar el total de dinero recaudado
 DELIMITER //
 CREATE PROCEDURE totalDeDineroRecaudado()
 BEGIN
-	SELECT SUM(montoInfraccion) AS TOTAL_DINERO_RECAUDADO FROM svp_multas_registradas WHERE estadoDeLaMulta = 'PAGADO';
+	SELECT sum(montoInfraccion) AS TOTAL_DINERO_RECAUDADO FROM svp_tipos_de_multas INNER JOIN svp_multas_registradas ON idTipoMultaFk 	  = idTipoMulta WHERE estadoDeLaMulta = 'PAGADO';
 END //
 DELIMITER ;
 
@@ -231,7 +239,6 @@ END //
 DELIMITER ;
 
 
-
 -- procedimiento para exonerar multas
 DELIMITER //
 CREATE PROCEDURE exonerarUnaMulta(
@@ -239,29 +246,6 @@ CREATE PROCEDURE exonerarUnaMulta(
 )
 BEGIN
 	UPDATE `svp_multas_registradas` SET `estadoDeLaMulta`='EXONERADO' WHERE idMulta = pidMulta;
-END //
-DELIMITER ;
-
-
-
-
--- procedimiento para insertar las multas en la tabla svp_multas_registradas
-DELIMITER //
-CREATE PROCEDURE insertarMultas(
-    IN ptipoPlaca varchar(5),
-    IN pnumeroPlaca varchar(10),
-    IN pmarca varchar(20),
-    IN pcolor varchar(20),
-    IN plugarInfraccion varchar(50),
-    IN pmontoInfraccion numeric(10,2),
-    IN pmontoConDescuento numeric(10,2),
-    IN pfotografiaRuta varchar(100),
-    IN pfechaMulta varchar(20),
-    IN pmesMulta varchar(5),
-    IN pestadoDeLaMulta varchar(10)
-)
-BEGIN
-	INSERT INTO `svp_multas_registradas`(`tipoPlaca`, `numeroPlaca`, `marca`, `color`, `lugarInfraccion`, `montoInfraccion`, `montoConDescuento`, `fotografiaRuta`, `fechaMulta`, `mesMulta`, `estadoDeLaMulta`) VALUES (ptipoPlaca,pnumeroPlaca,pmarca,pcolor,plugarInfraccion,pmontoInfraccion,pmontoConDescuento,pfotografiaRuta,pfechaMulta,pmesmulta,pestadoDeLaMulta);
 END //
 DELIMITER ;
 
@@ -332,8 +316,42 @@ DELIMITER ;
 
 
 
+-- procedimiento para insertar las multas en la tabla svp_multas_registradas
+DELIMITER //
+CREATE PROCEDURE insertarMultas(
+    IN ptipoPlaca varchar(5),
+    IN pnumeroPlaca varchar(10),
+    IN pmarca varchar(20),
+    IN pcolor varchar(20),
+    IN plugarInfraccion varchar(50),
+    IN pidTipoMultaFk INT,
+    IN pfotografiaRuta varchar(100),
+    IN pfechaMulta varchar(20),
+    IN pmesMulta varchar(5),
+    IN pestadoDeLaMulta varchar(10)
+)
+BEGIN
+	INSERT INTO `svp_multas_registradas`(`tipoPlaca`, `numeroPlaca`, `marca`, `color`, `lugarInfraccion`, `idTipoMultaFk`, `fotografiaRuta`, `fechaMulta`, `mesMulta`, `estadoDeLaMulta`) VALUES (ptipoPlaca,pnumeroPlaca,pmarca,pcolor,plugarInfraccion,pidTipoMultaFk,pfotografiaRuta,pfechaMulta,pmesmulta,pestadoDeLaMulta);
+END //
+DELIMITER ;
+
+
+
+
+-- procedimiento para mostrar el monto de infracción y con descuento al seleccionar
+-- un tipo de multa en un select
+DELIMITER //
+CREATE PROCEDURE verMontoInfraccionYDescuento(
+    IN pidTipoMulta int
+)
+BEGIN
+	SELECT montoInfraccion,montoConDescuento FROM svp_tipos_de_multas WHERE idTipoMulta = pidTipoMulta;
+END //
+DELIMITER ;
+
+
+
+
 -- fin del script
-
-
 
 
