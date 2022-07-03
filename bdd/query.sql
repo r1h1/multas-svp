@@ -45,12 +45,11 @@ create table svp_usuarios
 create table svp_log_ingreso_sistema
 (
 	idIngresoSistema int primary key not null AUTO_INCREMENT,
-    idFkUsuario int not null,
+    usuarioRegistrado varchar(10) not null,
     fechaIngreso varchar(20) not null,
     horaIngreso varchar(20) not null,
     soIngreso varchar(25) not null,
-    ipIngreso varchar(50) not null,
-    FOREIGN KEY (idFkUsuario) REFERENCES svp_usuarios(idUsuario)
+    ipIngreso varchar(50) not null
 );
 
 
@@ -292,6 +291,42 @@ CREATE PROCEDURE insertarUsuarioSistema
 BEGIN
 	INSERT INTO `svp_usuarios`(`nombreCompleto`, `cuiNit`, `usuarioRegistrado`, `rolUsuarioRegistrado`) 
 	VALUES (pnombreCompleto,pcuiNit,pusuarioRegistrado,prolUsuarioRegistrado);
+END //
+DELIMITER ;
+
+
+
+-- procedimiento para insertar log de cada acceso al sistema
+DELIMITER //
+CREATE PROCEDURE insertarLogIngresoSistema
+(
+   IN pusuarioRegistrado varchar(10),
+   IN pfechaIngreso varchar(20),
+   IN phoraIngreso varchar(20),
+   IN psoIngreso varchar(25),
+   IN pipIngreso varchar(50)
+)
+BEGIN
+	INSERT INTO `svp_log_ingreso_sistema`(`usuarioRegistrado`, `fechaIngreso`, `horaIngreso`, `soIngreso`, `ipIngreso`)
+    VALUES (pusuarioRegistrado,pfechaIngreso,phoraIngreso,psoIngreso,pipIngreso);
+END //
+DELIMITER ;
+
+
+
+-- procedimiento para insertar log de cada consulta de un cliente
+DELIMITER //
+CREATE PROCEDURE insertarLogConsultaCliente
+(
+    IN pnumeroPlacaCompleto varchar(15),
+    IN pfechaIngreso varchar(20),
+    IN phoraIngreso varchar(20),
+    IN psoIngreso varchar(25),
+    IN pipIngreso varchar(50)
+)
+BEGIN
+	INSERT INTO `svp_log_consulta_clientes`(`numeroPlacaCompleto`, `fechaIngreso`, `horaIngreso`, `soIngreso`, `ipIngreso`) 
+    VALUES (pnumeroPlacaCompleto,pfechaIngreso,phoraIngreso,psoIngreso,pipIngreso);
 END //
 DELIMITER ;
 
