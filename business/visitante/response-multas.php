@@ -1,8 +1,16 @@
 <?php
+  session_start();
+  error_reporting(0);
+  $varsesion = $_SESSION['usuario'];
 
-error_reporting(0);
-
+  if($varsesion == null || $varsesion = ''){
+    echo'<script type="text/javascript">
+            window.location.href="../../404";
+    </script>';
+    die();
+  }
 ?>
+
 <div class="container w-75">
     <section class="mt-5 muestra-multas">
         <p class="h2-estilo fw-bold">Información del Vehículo</p>
@@ -30,6 +38,8 @@ error_reporting(0);
 
 
                     $result = mysqli_query($conexion, $sql);
+                    while (mysqli_next_result($conexion)) {;
+                    }
                     $numero_filas = mysqli_num_rows($result);
 
                     if ($numero_filas == 0) {
@@ -116,3 +126,27 @@ error_reporting(0);
     <br>
     <i><a href="https://www.munisanvicentepacaya.laip.gt/" target="_blank">https://www.munisanvicentepacaya.laip.gt/</a></i>
 </footer>
+
+<?php
+
+//INSERTA DATOS EN EL LOG PARA SABER LA CONSULTA
+$numeroPlacaCompleto = $sTipoDePlaca . $sNumeroPlaca;
+
+date_default_timezone_set('America/Guatemala');
+$fechaDeIngreso = date('d-m-Y', time());
+$horaIngreso = date('h:i:s a', time());
+$soIngreso = php_uname();
+$ipIngreso = $_SERVER['REMOTE_ADDR'];
+
+if ($numeroPlacaCompleto == "") {
+    //no hace nada
+} else {
+    $sqlInsertLogConsultaCliente = "CALL insertarLogConsultaCliente('$numeroPlacaCompleto','$fechaDeIngreso','$horaIngreso','$soIngreso','$ipIngreso');";
+
+
+    $resultLog = mysqli_query($conexion, $sqlInsertLogConsultaCliente);
+    while (mysqli_next_result($conexion)) {;
+    }
+}
+
+?>

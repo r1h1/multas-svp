@@ -41,19 +41,19 @@
                         <img src="../../img/logo.png" class="img-fluid" id="logoLogin" alt="Sample image">
                     </div>
                     <div class="col-md-7 col-lg-5 col-xl-6 offset-xl-1 mt-4 mb-5">
-                        <form>
+                        <form action="../../business/login/validate-credentials" method="POST">
 
                             <div class="form-outline mb-5 text-center">
-                                <p class="h1-estilo">Sistema de Multas</p>
+                                <p class="h1-estilo fw-bold">Sistema de Multas</p>
                                 <p class="p-estilo">Inicia sesión para continuar.</p>
                             </div>
 
                             <!-- Email input -->
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="form3Example3">Usuario <span style="color: red;">*</span></label>
-                                <input type="email" name="usuario" class="form-control" placeholder="Ingresa tu usuario aquí" 
+                                <input type="text" name="usuario" class="form-control" placeholder="Ingresa tu usuario aquí" 
                                     oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" 
-                                    maxlength="8" style="border-radius: 10px;" required />
+                                    maxlength="8" style="border-radius: 10px; text-transform:lowercase;" required />
                             </div>
 
                             <!-- Password input -->
@@ -65,7 +65,7 @@
                             </div>
 
                             <div class="text-center text-lg-start mt-4 pt-2 mb-5">
-                                <button type="button" class="btn btn-primary mt-2" style="padding-left: 2.5rem; padding-right: 2.5rem;" onclick="redireccionarLogin()">Ingresa</button>
+                                <button type="submit" class="btn btn-primary mt-2" style="padding-left: 2.5rem; padding-right: 2.5rem;">Ingresar</button>
                                 <a href="login" class="btn btn-dark mt-2">Regresar</a>
                             </div>
                         </form>
@@ -81,11 +81,6 @@
 
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script>
-        function redireccionarLogin() {
-            window.location.href = "../../views/rol/admin/dashboard";
-        }
-    </script>
 </body>
 
 </html>

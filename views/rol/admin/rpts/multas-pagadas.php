@@ -1,3 +1,16 @@
+<?php
+  session_start();
+  error_reporting(0);
+  $varsesion = $_SESSION['usuario'];
+
+  if($varsesion == null || $varsesion = ''){
+    echo'<script type="text/javascript">
+            window.location.href="../../../404";
+    </script>';
+    die();
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -127,7 +140,7 @@
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="../../../../business/login/session-out.php">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Cerrar Sesión
                                 </a>

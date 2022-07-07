@@ -68,7 +68,7 @@
                     <i class="fa-solid fa-car carrito-logo" style="color: #FED500"></i>
                 </div>
                 <div class="col-md-10">
-                    <h1 class="m-4 h1-estilo">Consulta de Remisiones</h1>
+                    <h1 class="m-4 h1-estilo fw-bold">Consulta de Remisiones</h1>
                     <p class="m-4 p-estilo">Selecciona el tipo de placa del vehículo, seguidamente ingresa el número de placa.</p>
                 </div>
             </div>

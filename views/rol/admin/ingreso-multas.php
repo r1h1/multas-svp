@@ -1,3 +1,16 @@
+<?php
+  session_start();
+  error_reporting(0);
+  $varsesion = $_SESSION['usuario'];
+
+  if($varsesion == null || $varsesion = ''){
+    echo'<script type="text/javascript">
+            window.location.href="../../404";
+    </script>';
+    die();
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -53,7 +66,7 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center mt-4 mb-2">
-                <div class="sidebar-brand-text mx-3">Muni SVP <br> SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3 fw-bold">Muni SVP <br> SB Admin <sup>2</sup></div>
             </a>
 
             <!-- Divider -->
@@ -127,7 +140,7 @@
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="../../../business/login/session-out.php">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Cerrar Sesión
                                 </a>
@@ -213,10 +226,7 @@
                                 <label for="inputP4" class="form-label">Descuento (Días hábiles)</label>
                                 <input type="text" class="form-control" name="montoDescuento" readonly placeholder="0.00" required>
                             </div>
-                            <div class="col-md-12 mt-4">
-                                <label for="inputE4" class="form-label">Fotografía del Vehículo</label>
-                                <input accept="image/png,image/jpeg,image/jpg" class="form-control" type="file" name="fotoCarro">
-                            </div>
+
                             <div class="col-12 mt-4 mb-5">
                                 <button type="submit" class="btn btn-success py-2 px-5">Añadir</button>
                             </div>

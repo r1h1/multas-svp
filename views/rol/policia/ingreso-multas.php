@@ -1,3 +1,16 @@
+<?php
+  session_start();
+  error_reporting(0);
+  $varsesion = $_SESSION['usuario'];
+
+  if($varsesion == null || $varsesion = ''){
+    echo'<script type="text/javascript">
+            window.location.href="../../404";
+    </script>';
+    die();
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -125,14 +138,10 @@
                     style="text-transform:uppercase" maxlength="50" title="Ingrese la infracción cometida" placeholder="0.00" readonly>
                 </div>
 
-                <div class="col-md-12 mt-4">
-                    <label for="inputE4" class="form-label">Fotografía del Vehículo</label>
-                    <input accept="image/png,image/jpeg,image/jpg" class="form-control" type="file" id="formFile" name="fotoCarro" placeholder="">
-                </div>
-
                 <div class="col-12 mt-5">
                     <button type="submit" class="btn btn-success mt-2">Añadir</button>
                     <a href="ingreso-multas" class="btn btn-warning mt-2">Limpiar Campos</a>
+                    <a href="../../../business/login/session-out.php" class="btn btn-danger mt-2">Cerrar Sesión</a>
                 </div>
             </form>
         </section>
