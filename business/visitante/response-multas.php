@@ -1,0 +1,118 @@
+<?php
+
+error_reporting(0);
+
+?>
+<div class="container w-75">
+    <section class="mt-5 muestra-multas">
+        <p class="h2-estilo fw-bold">Información del Vehículo</p>
+        <div class="tabla-info-vehiculo table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">PLACA</th>
+                        <th scope="col">MARCA</th>
+                        <th scope="col">COLOR</th>
+                    </tr>
+                    <?php
+
+
+                    include("../data/conexion-bd.php");
+
+
+                    $sNumeroPlaca = $_POST["numeroPlaca"];
+                    $sNumeroPlaca = strtoupper($sNumeroPlaca);
+
+                    $sTipoDePlaca = $_POST["placaTipo"];
+
+
+                    $sql = "CALL verMultasPorPlaca('$sTipoDePlaca','$sNumeroPlaca');";
+
+
+                    $result = mysqli_query($conexion, $sql);
+                    $numero_filas = mysqli_num_rows($result);
+
+                    if ($numero_filas == 0) {
+                        echo "<script>
+                        Swal.fire({
+                            icon: 'success',
+                            title: '¡Felicidades!',
+                            text: '$sTipoDePlaca-$sNumeroPlaca no tiene ninguna multa pendiente.'
+                          })
+                    </script>";
+                    } else {
+                        echo "<script>
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'info',
+                            title: 'Se encontró una multa',
+                            showConfirmButton: false,
+                            timer: 1000
+                          })
+                        </script>";
+                    }
+
+
+                    while ($mostrar = mysqli_fetch_array($result)) {
+
+                        $monto = $mostrar['montoInfraccion'];
+                        $montoConDescuento = $mostrar['montoConDescuento'];
+
+                        $totalAPagar = $monto - $montoConDescuento;
+
+                    ?>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="fw-bold text-decoration-underline"><?php echo $sTipoDePlaca, "-", $sNumeroPlaca ?></td>
+                        <td><?php echo $mostrar['marca']; ?></td>
+                        <td><?php echo $mostrar['color']; ?></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <section class="mt-5 detalle-infraccion">
+        <p class="h2-estilo fw-bold">Detalle de la infracción</p>
+        <div class="tabla-info-vehiculo table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">FECHA</th>
+                        <th scope="col">LUGAR</th>
+                        <th scope="col">INFRACCIÓN</th>
+                        <th scope="col">MONTO</th>
+                        <th scope="col">DESCUENTO</th>
+                        <th scope="col">TOTAL A PAGAR</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><?php echo $mostrar['fechaMulta']; ?></td>
+                        <td><?php echo $mostrar['lugarInfraccion']; ?></td>
+                        <td class="fw-bold text-decoration-underline"><?php echo $mostrar['nombreTipoMulta']; ?></td>
+                        <td><?php echo $mostrar['montoInfraccion']; ?></td>
+                        <td><?php echo $mostrar['montoConDescuento']; ?></td>
+                        <td><?php echo $totalAPagar; ?></td>
+                    </tr>
+                </tbody>
+            <?php
+
+                    }
+
+                    clearstatcache();
+
+            ?>
+            </table>
+            <div class="cmt-2">
+                <a href="#" class="btn btn-success">Generar Boleta</a>
+                <a href="../views/visitante" class="btn btn-dark">Regresar</a>
+            </div>
+    </section>
+</div>
+
+<footer class="container-fluid p-4" style="background-color: #2169B5;">
+    <a href="#"> &copy; Todos los Derechos reservados, Municipalidad de San Vicente Pacaya, Escuintla, Guatemala</a>
+    <br>
+    <i><a href="https://www.munisanvicentepacaya.laip.gt/" target="_blank">https://www.munisanvicentepacaya.laip.gt/</a></i>
+</footer>

@@ -7,14 +7,13 @@ $server = 'localhost';
 $usuario = 'root';
 
 //contraseña acceso server
-$contraseña = '';
+$contrasena = '';
 
 //nombre base de datos
-$baseDeDatos = 'multasvp';
+$baseDeDatos = 'svp_software_multas';
 
 //conexion
-$conexion = mysqli_connect($dbserver, $dbuser_name, $dbpassword, $dbnombre_bdd);
-
+$conexion = mysqli_connect($server, $usuario, $contrasena, $baseDeDatos);
 
 //error si no hay conexiones abiertas
 if (!$conexion) {

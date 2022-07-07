@@ -119,7 +119,9 @@ CREATE PROCEDURE verMultasPorPlaca(
     IN pnumeroPlaca varchar(10)
 )
 BEGIN
-	SELECT * FROM svp_multas_registradas WHERE tipoPlaca = ptipoPlaca AND numeroPlaca = pnumeroPlaca ORDER BY fechaMulta ASC;
+	    SELECT tipoPlaca,numeroPlaca,marca,color,lugarInfraccion,nombreTipoMulta,montoInfraccion,montoConDescuento,
+        fotografiaRuta,fechaMulta,mesMulta,estadoDeLaMulta FROM `svp_multas_registradas` INNER JOIN svp_tipos_de_multas ON idTipoMultaFk = idTipoMulta
+        WHERE tipoPlaca = ptipoPlaca AND numeroPlaca = pnumeroPlaca ORDER BY fechaMulta ASC;
 END //
 DELIMITER ;
 
@@ -345,7 +347,7 @@ CREATE PROCEDURE verMontoInfraccionYDescuento(
     IN pidTipoMulta int
 )
 BEGIN
-	SELECT montoInfraccion,montoConDescuento FROM svp_tipos_de_multas WHERE idTipoMulta = pidTipoMulta;
+	SELECT nombreTipoMulta,montoInfraccion,montoConDescuento FROM svp_tipos_de_multas WHERE idTipoMulta = pidTipoMulta;
 END //
 DELIMITER ;
 

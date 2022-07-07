@@ -52,78 +52,12 @@
         </nav>
     </header>
 
-    <div class="container w-75">
-        <main>
-            <div class="mt-5">
-                <h1 class="h1-estilo">Remisiones</h1>
-            </div>
-        </main>
-        <section class="mt-5 muestra-multas">
-            <p class="h2-estilo">Información del Vehículo</p>
-            <div class="tabla-info-vehiculo table-responsive">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th scope="col">PLACA</th>
-                            <th scope="col">MARCA</th>
-                            <th scope="col">COLOR</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="fw-bold"></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-        <section class="mt-5 detalle-infraccion">
-            <p class="h2-estilo">Detalle de la infracción</p>
-            <div class="tabla-info-vehiculo table-responsive">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th scope="col">FECHA</th>
-                            <th scope="col">LUGAR</th>
-                            <th scope="col">INFRACCIÓN</th>
-                            <th scope="col">MONTO</th>
-                            <th scope="col">DESCUENTO</th>
-                            <th scope="col">TOTAL A PAGAR</th>
-                            <th scope="col">FOTOGRAFÍA</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="row mt-4 mb-4">
-                    <div class="col">
-                        <p>TOTAL Q.</p>
-                    </div>
-                    <div class="col">
-                        <p class="fw-bold">0.00</p>
-                    </div>
-                    <div class="col">
-                        <a href="#" class="btn btn-success">Generar Boleta</a>
-                    </div>
-                </div>
-        </section>
-    </div>
-    <footer class="container-fluid p-4" style="background-color: #2169B5;">
-        <a href="#"> &copy; Todos los Derechos reservados, Municipalidad de San Vicente Pacaya, Escuintla, Guatemala</a>
-        <br>
-        <i><a href="https://www.munisanvicentepacaya.laip.gt/" target="_blank">https://www.munisanvicentepacaya.laip.gt/</a></i>
-    </footer>
+
+    <?php
+
+    include("../business/visitante/response-multas.php");
+
+    ?>
 
 
 

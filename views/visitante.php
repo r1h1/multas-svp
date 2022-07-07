@@ -76,10 +76,9 @@
         <section class="mt-3 container-sm w-100">
             <form class="row" action="resultado-multas" method="POST">
                 <div class="col-md-6 mt-4">
-                    <label for="inputE4" class="form-label">Tipo de Placa</label>
-                    <select class="form-select" required title="Seleccione el tipo de placa a consultar..." name="tipoPlaca>
-                        <option value="">Seleccione...</option>
-                        <option value=" P">P</option>
+                    <label class="form-label">Tipo de Placa</label>
+                    <select class="form-select" name="placaTipo" required>
+                        <option value="P">P</option>
                         <option value="C">C</option>
                         <option value="M">M</option>
                         <option value="A">A</option>
@@ -99,11 +98,11 @@
                     <label for="inputP4" class="form-label">Número de Placa</label>
                     <input type="text" class="form-control" name="numeroPlaca" 
                     oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" 
-                    style="text-transform:uppercase" maxlength="6" title="Ingrese el número de placa a consultar" placeholder="158HRZ" required>
+                    style="text-transform:uppercase" maxlength="6" title="Ingrese el número de placa a consultar" placeholder="INGRESA TU PLACA AQUÍ" required>
                 </div>
 
                 <div class="col-12 mt-3">
-                    <button type="submit" class="btn btn-primary py-2 px-5">Consultar</button>
+                    <button type="submit" class="btn btn-primary py-2 px-5">Consultar Remisiones</button>
                 </div>
             </form>
         </section>
