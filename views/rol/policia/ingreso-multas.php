@@ -72,11 +72,10 @@
             <p class="p-estilo">Selecciona el tipo de placa, numero, marca, etc para poder registrar una infracción en el sistema.</p>
         </main>
         <section class="mt-5">
-            <form class="row" action="resultado-multas" method="POST">
+            <form class="row" action="../../../business/policia/insert" method="POST">
                 <div class="col-md-4 mt-4">
                     <label for="inputE4" class="form-label">Tipo de Placa</label>
                     <select class="form-select" required title="Seleccione el tipo de placa a consultar..." name="tipoPlaca">
-                        <option value="">Seleccione...</option>
                         <option value="P">P</option>
                         <option value="C">C</option>
                         <option value="M">M</option>

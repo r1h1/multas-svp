@@ -1,16 +1,3 @@
-<?php
-  session_start();
-  error_reporting(0);
-  $varsesion = $_SESSION['usuario'];
-
-  if($varsesion == null || $varsesion = ''){
-    echo'<script type="text/javascript">
-            window.location.href="../../404";
-    </script>';
-    die();
-  }
-?>
-
 <div class="container w-75">
     <section class="mt-5 muestra-multas">
         <p class="h2-estilo fw-bold">Información del Vehículo</p>
@@ -70,13 +57,21 @@
 
                         $totalAPagar = $monto - $montoConDescuento;
 
+                        $marca = $mostrar['marca'];
+                        $color = $mostrar['color'];
+                        $lugar = $mostrar['lugarInfraccion'];
+
+                        $marca =  strtoupper($marca);
+                        $color =  strtoupper($color);
+                        $lugar =  strtoupper($lugar);
+
                     ?>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="fw-bold text-decoration-underline"><?php echo $sTipoDePlaca, "-", $sNumeroPlaca ?></td>
-                        <td><?php echo $mostrar['marca']; ?></td>
-                        <td><?php echo $mostrar['color']; ?></td>
+                        <td class="fw-bold text-decoration-underline"><?php echo $sTipoDePlaca, "-", $sNumeroPlaca; ?></td>
+                        <td><?php echo $marca; ?></td>
+                        <td><?php echo $color; ?></td>
                     </tr>
                 </tbody>
             </table>
@@ -99,11 +94,11 @@
                 <tbody>
                     <tr>
                         <td><?php echo $mostrar['fechaMulta']; ?></td>
-                        <td><?php echo $mostrar['lugarInfraccion']; ?></td>
+                        <td><?php echo $lugar; ?></td>
                         <td class="fw-bold text-decoration-underline"><?php echo $mostrar['nombreTipoMulta']; ?></td>
-                        <td><?php echo $mostrar['montoInfraccion']; ?></td>
-                        <td><?php echo $mostrar['montoConDescuento']; ?></td>
-                        <td><?php echo $totalAPagar; ?></td>
+                        <td><span>Q</span><?php echo $mostrar['montoInfraccion']; ?></td>
+                        <td><span>Q</span><?php echo $mostrar['montoConDescuento']; ?></td>
+                        <td><span>Q</span><?php echo $totalAPagar; ?></td>
                     </tr>
                 </tbody>
             <?php

@@ -19,7 +19,6 @@ create table svp_multas_registradas
     color varchar(20) not null,
     lugarInfraccion varchar(50) not null,
     idTipoMultaFk int not null,
-    fotografiaRuta varchar(100),
     fechaMulta varchar(20) not null,
     mesMulta varchar(5) not null,
     estadoDeLaMulta varchar(10) not null
@@ -120,7 +119,7 @@ CREATE PROCEDURE verMultasPorPlaca(
 )
 BEGIN
 	    SELECT tipoPlaca,numeroPlaca,marca,color,lugarInfraccion,nombreTipoMulta,montoInfraccion,montoConDescuento,
-        fotografiaRuta,fechaMulta,mesMulta,estadoDeLaMulta FROM `svp_multas_registradas` INNER JOIN svp_tipos_de_multas ON idTipoMultaFk = idTipoMulta
+        fechaMulta,mesMulta,estadoDeLaMulta FROM `svp_multas_registradas` INNER JOIN svp_tipos_de_multas ON idTipoMultaFk = idTipoMulta
         WHERE tipoPlaca = ptipoPlaca AND numeroPlaca = pnumeroPlaca ORDER BY fechaMulta ASC;
 END //
 DELIMITER ;
@@ -327,13 +326,12 @@ CREATE PROCEDURE insertarMultas(
     IN pcolor varchar(20),
     IN plugarInfraccion varchar(50),
     IN pidTipoMultaFk INT,
-    IN pfotografiaRuta varchar(100),
     IN pfechaMulta varchar(20),
     IN pmesMulta varchar(5),
     IN pestadoDeLaMulta varchar(10)
 )
 BEGIN
-	INSERT INTO `svp_multas_registradas`(`tipoPlaca`, `numeroPlaca`, `marca`, `color`, `lugarInfraccion`, `idTipoMultaFk`, `fotografiaRuta`, `fechaMulta`, `mesMulta`, `estadoDeLaMulta`) VALUES (ptipoPlaca,pnumeroPlaca,pmarca,pcolor,plugarInfraccion,pidTipoMultaFk,pfotografiaRuta,pfechaMulta,pmesmulta,pestadoDeLaMulta);
+	INSERT INTO `svp_multas_registradas`(`tipoPlaca`, `numeroPlaca`, `marca`, `color`, `lugarInfraccion`, `idTipoMultaFk`, `fechaMulta`, `mesMulta`, `estadoDeLaMulta`) VALUES (ptipoPlaca,pnumeroPlaca,pmarca,pcolor,plugarInfraccion,pidTipoMultaFk,pfechaMulta,pmesmulta,pestadoDeLaMulta);
 END //
 DELIMITER ;
 
