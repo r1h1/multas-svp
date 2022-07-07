@@ -164,11 +164,10 @@ if ($varsesion == null || $varsesion = '') {
                         </div>
                     </main>
                     <section class="mt-3 container-sm w-100 mb-5">
-                        <form class="row" action="" method="POST">
+                        <form class="row" action="consulta-remisiones" method="GET">
                             <div class="col-md-6 mt-4">
                                 <label for="inputE4" class="form-label">Tipo de Placa</label>
                                 <select class="form-select" required title="Seleccione el tipo de placa a consultar..." name="tipoPlaca">
-                                    <option value="">Seleccione...</option>
                                     <option value="P">P</option>
                                     <option value="C">C</option>
                                     <option value="M">M</option>
@@ -213,13 +212,61 @@ if ($varsesion == null || $varsesion = '') {
                                         <th scope="col">COLOR</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="fw-bold"></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
+                                <?php
+
+                                include("../../../data/conexion-bd.php");
+
+
+                                $sNumeroPlaca = $_GET["numeroPlaca"];
+                                $sNumeroPlaca = strtoupper($sNumeroPlaca);
+
+                                $sTipoDePlaca = $_GET["tipoPlaca"];
+
+
+                                $sql = "CALL verMultasPorPlaca('$sTipoDePlaca','$sNumeroPlaca');";
+
+
+                                $result = mysqli_query($conexion, $sql);
+                                while (mysqli_next_result($conexion)) {;
+                                }
+                                $numero_filas = mysqli_num_rows($result);
+
+                                if ($numero_filas > 0) {
+                                    echo "<script>
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'info',
+                                        title: 'Se encontró una multa',
+                                        showConfirmButton: false,
+                                        timer: 1000
+                                      })
+                                    </script>";
+                                }
+
+
+                                while ($mostrar = mysqli_fetch_array($result)) {
+
+                                    $monto = $mostrar['montoInfraccion'];
+                                    $montoConDescuento = $mostrar['montoConDescuento'];
+
+                                    $totalAPagar = $monto - $montoConDescuento;
+
+                                    $marca = $mostrar['marca'];
+                                    $color = $mostrar['color'];
+                                    $lugar = $mostrar['lugarInfraccion'];
+
+                                    $marca =  strtoupper($marca);
+                                    $color =  strtoupper($color);
+                                    $lugar =  strtoupper($lugar);
+
+                                ?>
+                                    <tbody>
+                                        <tr>
+                                            <td class="fw-bold"><?php echo $sTipoDePlaca, "-", $sNumeroPlaca; ?></td>
+                                            <td><?php echo $marca; ?></td>
+                                            <td><?php echo $color; ?></td>
+                                        </tr>
+                                    </tbody>
                             </table>
                         </div>
                     </section>
@@ -229,40 +276,34 @@ if ($varsesion == null || $varsesion = '') {
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th scope="col">SERIE</th>
                                         <th scope="col">FECHA</th>
                                         <th scope="col">LUGAR</th>
-                                        <th scope="col">INFRACCION</th>
+                                        <th scope="col">INFRACCIÓN</th>
                                         <th scope="col">MONTO</th>
                                         <th scope="col">DESCUENTO</th>
-                                        <th scope="col">TOTAL</th>
-                                        <th scope="col">FOTOGRAFÍA</th>
+                                        <th scope="col">TOTAL A PAGAR</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td><?php echo $mostrar['fechaMulta']; ?></td>
+                                        <td><?php echo $lugar; ?></td>
+                                        <td class="fw-bold text-decoration-underline"><?php echo $mostrar['nombreTipoMulta']; ?></td>
+                                        <td><span>Q</span><?php echo $mostrar['montoInfraccion']; ?></td>
+                                        <td><span>Q</span><?php echo $mostrar['montoConDescuento']; ?></td>
+                                        <td><span>Q</span><?php echo $totalAPagar; ?></td>
                                     </tr>
                                 </tbody>
+                            <?php
+
+                                }
+
+                                clearstatcache();
+
+                            ?>
                             </table>
-                            <div class="row mt-4 mb-4">
-                                <div class="col">
-                                    <p>TOTAL Q.</p>
-                                </div>
-                                <div class="col">
-                                    <p class="fw-bold">0.00</p>
-                                </div>
-                                <div class="col">
-                                    <a href="#" class="btn btn-success">Generar Boleta</a>
-                                </div>
-                            </div>
+
+                            <a href="#" class="btn btn-success">Generar Boleta</a>
                     </section>
 
                 </div>

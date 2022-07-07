@@ -13,7 +13,7 @@
     $smarca = $_POST['marca'];
     $scolor = $_POST['color'];
     $slugarinfraccion = $_POST['lugarInfraccion'];
-    $sinfraccioncometida = $_POST['tipoMulta'];
+    $sinfraccioncometida = $_POST['tipoInfraccion'];
     $sidtipomultafk = "1";
     $sfechamulta = $fechaDeIngreso;
     $smesmulta = $mesIngreso;
@@ -35,13 +35,13 @@
     if($result == 1){
             echo'<script type="text/javascript">
                 alert("Registrado correctamente");
-                window.location.href="../../views/rol/policia/ingreso-multas";
+                window.location.href="../../views/rol/admin/ingreso-multas";
             </script>';
     }
     else{
         echo'<script type="text/javascript">
                 alert("Error al registrar");
-                window.location.href="../../views/rol/login";
+                window.location.href="../../views/rol/admin/ingreso-multas";
             </script>';
     }
 

@@ -164,7 +164,7 @@
                         </div>
                     </main>
                     <section class="mt-4 container-sm w-100 mb-5">
-                        <form class="row" action="" method="POST">
+                        <form class="row" action="../../../business/admin/insert-u" method="POST">
                             <div class="col-md-6 mt-4">
                                 <label for="inputP4" class="form-label">Nombre Completo</label>
                                 <input type="text" class="form-control" name="nombrecompleto" 
@@ -182,7 +182,7 @@
                                 <label for="inputP4" class="form-label">Usuario</label>                                
                                 <input type="text" class="form-control" name="usuario" oninput="javascript: if (this.value.length > this.maxLength)
                                     this.value = this.value.slice(0, this.maxLength);" 
-                                    maxlength="8" required placeholder="jsantizo">
+                                    maxlength="8" style="text-transform:lowercase;" required placeholder="jsantizo">
                             </div>
                             <div class="col-md-6 mt-4">
                                 <label for="inputP4" class="form-label">Rol</label>

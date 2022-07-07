@@ -164,11 +164,10 @@
                         </div>
                     </main>
                     <section class="mt-4 container-sm w-100 mb-5">
-                        <form class="row" action="" method="POST">
+                        <form class="row" action="../../../business/admin/insert-m" method="POST">
                             <div class="col-md-4 mt-4">
                                 <label for="inputE4" class="form-label">Tipo de Placa</label>
                                 <select class="form-select" name="tipoPlaca" required title="Seleccione el tipo de placa a consultar...">
-                                    <option value="">Seleccione...</option>
                                     <option value="P">P</option>
                                     <option value="C">C</option>
                                     <option value="M">M</option>
@@ -205,7 +204,7 @@
                             </div>
                             <div class="col-md-8 mt-4">
                                 <label for="inputP4" class="form-label">Lugar de la Infracción</label>
-                                <input type="text" class="form-control" name="infraccion" style="text-transform:uppercase"
+                                <input type="text" class="form-control" name="lugarInfraccion" style="text-transform:uppercase"
                                 placeholder="San vicente pacaya" required>
                             </div>
                             <div class="col-md-4 mt-4">

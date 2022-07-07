@@ -25,8 +25,7 @@
 
 
                     $result = mysqli_query($conexion, $sql);
-                    while (mysqli_next_result($conexion)) {;
-                    }
+                    while (mysqli_next_result($conexion)) {;}
                     $numero_filas = mysqli_num_rows($result);
 
                     if ($numero_filas == 0) {
