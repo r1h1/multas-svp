@@ -154,7 +154,7 @@
 
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid w-75">
+                <div class="container-fluid" style="width: 92%;">
 
                     <!-- Page Heading -->
                     <div class="mt-5 mb-5">
@@ -187,11 +187,11 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form class="row" action="" method="POST">
+                                    <form class="row" action="" method="GET">
                                         <div class="col-md-6 mt-4">
                                             <label for="inputE4" class="form-label">Tipo de Placa</label>
-                                            <select class="form-select" required title="Seleccione el tipo de placa a consultar..." name="tipoPlaca">
-                                                <option value=" P">P</option>
+                                            <select class="form-select" required name="tipoPlaca">
+                                                <option value="P">P</option>
                                                 <option value="C">C</option>
                                                 <option value="M">M</option>
                                                 <option value="A">A</option>
@@ -209,11 +209,14 @@
                                         </div>
                                         <div class="col-md-6 mt-4">
                                             <label for="inputP4" class="form-label">Número de Placa</label>
-                                            <input type="text" class="form-control" name="numeroPlaca" oninput="javascript: if (this.value.length > this.maxLength) 
-                                            this.value = this.value.slice(0, this.maxLength);" style="text-transform:uppercase" maxlength="6" title="Ingrese el número de placa a consultar" placeholder="158hrz" required>
+                                            <input type="text" class="form-control" name="numeroPlaca" 
+                                            oninput="javascript: if (this.value.length > this.maxLength) 
+                                            this.value = this.value.slice(0, this.maxLength);" 
+                                            style="text-transform:uppercase" maxlength="6" 
+                                            title="Ingrese el número de placa a consultar" placeholder="158hrz" required>
                                         </div>
                                         <div class="col-md-12 mt-2 mb-3">
-                                            <button class="btn btn-success" type="submit" id="inputGroupFileAddon04">Buscar por Placa</button>
+                                            <button class="btn btn-success" type="submit" name="buscarXPlaca">Buscar por Placa</button>
                                         </div>
                                     </form>
                                 </div>
@@ -236,17 +239,19 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="" class="row" method="POST">
+                                    <form action="" class="row" method="GET">
                                         <div class="col-md-6 mt-4">
                                             <label for="inputP4" class="form-label">Fecha Inicio</label>
-                                            <input type="date" class="form-control" name="fInicio" id="fechaInicio" value="2022-06-27" placeholder="2022/06/27" required>
+                                            <input type="date" class="form-control" name="fInicio" id="fechaInicio" 
+                                            value="aaaa-mm-dd" placeholder="2022/06/27" required>
                                         </div>
                                         <div class="col-md-6 mt-4">
                                             <label for="inputP4" class="form-label">Fecha Fin</label>
-                                            <input type="date" class="form-control" name="fFin" id="fechaFin" value="2022-06-27" placeholder="2022/06/27" required>
+                                            <input type="date" class="form-control" name="fFin" id="fechaFin" 
+                                            value="aaaa-mm-dd" placeholder="2022/06/27" required>
                                         </div>
                                         <div class="col-md-12 mt-2">
-                                            <button class="btn btn-secondary" type="submit" id="inputGroupFileAddon04">Buscar por Fechas</button>
+                                            <button class="btn btn-secondary" type="submit" name="buscarXFechas">Buscar por Fechas</button>
                                         </div>
                                     </form>
                                 </div>
@@ -260,44 +265,19 @@
 
                     <hr style="color:#908796;">
 
-                    <div class="w-100 mb-2 mt-5">
-                        <p class="h2-estilo text-gray-800">Listado de Multas Pagadas</p>
-                        <div class="tabla-info-multas-pendientes-pago table-responsive">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">ID</th>
-                                        <th scope="col">PLACA</th>
-                                        <th scope="col">MARCA</th>
-                                        <th scope="col">COLOR</th>
-                                        <th scope="col">FECHA</th>
-                                        <th scope="col">LUGAR</th>
-                                        <th scope="col">INFRACCION</th>
-                                        <th scope="col">MONTO</th>
-                                        <th scope="col">DESCUENTO</th>
-                                        <th scope="col">TOTAL</th>
-                                        <th scope="col">FOTOGRAFÍA</th>
-                                        <th scope="col"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td><button class="btn btn-danger" type="submit">Borrar</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <?php
+                    
+                        if(isset($_GET["buscarXPlaca"])){
+                            include("../../../../business/admin/reportes/multasPagadas/filter-p.php");
+                        }
+                        if(isset($_GET["buscarXFechas"])){
+                            include("../../../../business/admin/reportes/multasPagadas/filter-date.php");
+                        }
+                        if(!isset($_GET["buscarXFechas"]) && !isset($_GET["buscarXPlaca"])){
+                            include("../../../../business/admin/reportes/multasPagadas/consult-mp.php");
+                        }                    
+                                                                    
+                    ?>
 
                         <div class="row mt-5">
                             <div class="col-md-4 mt-4">

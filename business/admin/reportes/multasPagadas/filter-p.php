@@ -13,9 +13,7 @@
                     <th scope="col">MONTO</th>
                     <th scope="col">DESCUENTO</th>
                     <th scope="col">TOTAL</th>
-                    <th scope="col">ESTADO</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
+                    <th scope="col">COMPROBANTE DE PAGO</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -30,7 +28,7 @@
                 $sTipoDePlaca = $_GET["tipoPlaca"];
 
 
-                $sql = "CALL verTodasLasMultasPendientesPagoXPlaca('$sTipoDePlaca','$sNumeroPlaca');";
+                $sql = "CALL verTodasLasMultasPagadasXPlaca('$sTipoDePlaca','$sNumeroPlaca');";
 
 
                 $result = mysqli_query($conexion, $sql);
@@ -76,9 +74,7 @@
                         <td><span>Q</span><?php echo $mostrar['montoInfraccion']; ?></td>
                         <td><span>Q</span><?php echo $mostrar['montoConDescuento']; ?></td>
                         <td><span>Q</span><?php echo $totalAPagar; ?></td>
-                        <td><?php echo $mostrar['estadoDeLaMulta']; ?></td>
-                        <td><button class="btn btn-secondary" type="submit">Generar Boleta</button></td>
-                        <td><button class="btn btn-success" type="submit">Pagar</button></td>
+                        <td class="fw-bold"><?php echo $mostrar['numeroComprobantePago']; ?></td>
                         <td><button class="btn btn-danger" type="submit">Borrar</button></td>
                     </tr>
             </tbody>

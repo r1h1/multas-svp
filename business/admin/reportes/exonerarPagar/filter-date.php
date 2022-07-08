@@ -31,13 +31,12 @@
 
                 if ($sfInicio > $sfFin) {
                     echo "<script>
-                      Swal.fire({
-                        icon: 'error',
-                        title: 'La fecha de inicio no puede ser mayor a la fecha fin.'
-                      });
-                </script>";
-                } 
-                else {
+                    Swal.fire({
+                      icon: 'error',
+                      title: 'La fecha de inicio no puede ser mayor a la fecha fin.'
+                    });
+              </script>";
+                } else {
 
                     $sql = "CALL verTodasLasMultasPendientesPagoXFecha('$sfInicio','$sfFin');";
 
@@ -86,8 +85,7 @@
                             <td><span>Q</span><?php echo $mostrar['montoInfraccion']; ?></td>
                             <td><span>Q</span><?php echo $mostrar['montoConDescuento']; ?></td>
                             <td><span>Q</span><?php echo $totalAPagar; ?></td>
-                            <td><button class="btn btn-secondary" type="submit">Generar Boleta</button></td>
-                            <td><button class="btn btn-success" type="submit">Pagar</button></td>
+                            <td><button class="btn btn-success" type="submit">Exonerar</button></td>
                             <td><button class="btn btn-danger" type="submit">Borrar</button></td>
                         </tr>
             </tbody>

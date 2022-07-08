@@ -77,8 +77,7 @@
                         <td><span>Q</span><?php echo $mostrar['montoConDescuento']; ?></td>
                         <td><span>Q</span><?php echo $totalAPagar; ?></td>
                         <td><?php echo $mostrar['estadoDeLaMulta']; ?></td>
-                        <td><button class="btn btn-secondary" type="submit">Generar Boleta</button></td>
-                        <td><button class="btn btn-success" type="submit">Pagar</button></td>
+                        <td><button class="btn btn-success" type="submit">Exonerar</button></td>
                         <td><button class="btn btn-danger" type="submit">Borrar</button></td>
                     </tr>
             </tbody>

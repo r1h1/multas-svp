@@ -21,7 +21,8 @@ create table svp_multas_registradas
     idTipoMultaFk int not null,
     fechaMulta varchar(20) not null,
     mesMulta varchar(5) not null,
-    estadoDeLaMulta varchar(10) not null
+    estadoDeLaMulta varchar(10) not null,
+    numeroComprobantePago varchar(100)
 );
 
 
@@ -90,16 +91,6 @@ DELIMITER ;
 
 
 
--- procedimiento para mostrar todas las multas en la tabla svp_multas_registradas
-DELIMITER //
-CREATE PROCEDURE verTodasLasMultas()
-BEGIN
-	SELECT * FROM svp_multas_registradas;
-END //
-DELIMITER ;
-
-
-
 
 -- procedimiento para mostrar todas las multas registradas
 DELIMITER //
@@ -119,7 +110,7 @@ CREATE PROCEDURE verMultasPorPlaca(
 )
 BEGIN
 	    SELECT tipoPlaca,numeroPlaca,marca,color,lugarInfraccion,nombreTipoMulta,montoInfraccion,montoConDescuento,
-        fechaMulta,mesMulta,estadoDeLaMulta FROM `svp_multas_registradas` INNER JOIN svp_tipos_de_multas ON idTipoMultaFk = idTipoMulta
+        fechaMulta,mesMulta,estadoDeLaMulta,numeroComprobantePago FROM `svp_multas_registradas` INNER JOIN svp_tipos_de_multas ON idTipoMultaFk = idTipoMulta
         WHERE tipoPlaca = ptipoPlaca AND numeroPlaca = pnumeroPlaca ORDER BY fechaMulta ASC;
 END //
 DELIMITER ;
@@ -131,7 +122,7 @@ DELIMITER //
 CREATE PROCEDURE verTodasLasMultasPendientesPago()
 BEGIN
 	SELECT tipoPlaca,numeroPlaca,marca,color,lugarInfraccion,nombreTipoMulta,montoInfraccion,montoConDescuento,
-        fechaMulta,mesMulta,estadoDeLaMulta FROM svp_multas_registradas INNER JOIN svp_tipos_de_multas 
+        fechaMulta,mesMulta,estadoDeLaMulta,numeroComprobantePago FROM svp_multas_registradas INNER JOIN svp_tipos_de_multas 
         ON idTipoMultaFk = idTipoMulta WHERE estadoDeLaMulta = 'PENDIENTE';
 END //
 DELIMITER ;
@@ -145,7 +136,9 @@ CREATE PROCEDURE verTodasLasMultasPendientesPagoXPlaca(
     IN pnumeroPlaca varchar(10)
 )
 BEGIN
-	SELECT * FROM svp_multas_registradas WHERE tipoPlaca = ptipoPlaca AND numeroPlaca = pnumeroPlaca AND estadoDeLaMulta = 'PENDIENTE';
+	SELECT tipoPlaca,numeroPlaca,marca,color,lugarInfraccion,nombreTipoMulta,montoInfraccion,montoConDescuento,
+        fechaMulta,mesMulta,estadoDeLaMulta,numeroComprobantePago FROM `svp_multas_registradas` INNER JOIN svp_tipos_de_multas ON idTipoMultaFk = idTipoMulta
+        WHERE tipoPlaca = ptipoPlaca AND numeroPlaca = pnumeroPlaca AND estadoDeLaMulta = 'PENDIENTE';
 END //
 DELIMITER ;
 
@@ -159,7 +152,9 @@ CREATE PROCEDURE verTodasLasMultasPendientesPagoXFecha(
     IN pfechaMultaFin varchar(20)
 )
 BEGIN
-	SELECT * FROM svp_multas_registradas WHERE fechaMulta BETWEEN pfechaMultaInicio AND pfechaMultaFin AND estadoDeLaMulta = 'PENDIENTE';
+	SELECT tipoPlaca,numeroPlaca,marca,color,lugarInfraccion,nombreTipoMulta,montoInfraccion,montoConDescuento,
+        fechaMulta,mesMulta,estadoDeLaMulta,numeroComprobantePago FROM `svp_multas_registradas` INNER JOIN svp_tipos_de_multas ON idTipoMultaFk = idTipoMulta
+        WHERE fechaMulta BETWEEN pfechaMultaInicio AND pfechaMultaFin AND estadoDeLaMulta = 'PENDIENTE';
 END //
 DELIMITER ;
 
@@ -179,7 +174,9 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE verTodasLasMultasPagadas()
 BEGIN
-	SELECT * FROM svp_multas_registradas WHERE estadoDeLaMulta = 'PAGADO';
+	SELECT tipoPlaca,numeroPlaca,marca,color,lugarInfraccion,nombreTipoMulta,montoInfraccion,montoConDescuento,
+        fechaMulta,mesMulta,estadoDeLaMulta,numeroComprobantePago FROM svp_multas_registradas INNER JOIN svp_tipos_de_multas 
+        ON idTipoMultaFk = idTipoMulta WHERE estadoDeLaMulta = 'PAGADO';
 END //
 DELIMITER ;
 
@@ -187,9 +184,14 @@ DELIMITER ;
 
 -- procedimiento para mostrar solo multas pagadas por placa
 DELIMITER //
-CREATE PROCEDURE verTodasLasMultasPagadasXPlaca()
+CREATE PROCEDURE verTodasLasMultasPagadasXPlaca(
+    IN ptipoPlaca varchar(5),
+    IN pnumeroPlaca varchar(10)
+)
 BEGIN
-	SELECT * FROM svp_multas_registradas WHERE tipoPlaca = ptipoPlaca AND numeroPlaca = pnumeroPlaca AND estadoDeLaMulta = 'PAGADO';
+	SELECT tipoPlaca,numeroPlaca,marca,color,lugarInfraccion,nombreTipoMulta,montoInfraccion,montoConDescuento,
+        fechaMulta,mesMulta,estadoDeLaMulta,numeroComprobantePago FROM svp_multas_registradas INNER JOIN svp_tipos_de_multas 
+        ON idTipoMultaFk = idTipoMulta WHERE tipoPlaca = ptipoPlaca AND numeroPlaca = pnumeroPlaca AND estadoDeLaMulta = 'PAGADO';
 END //
 DELIMITER ;
 
@@ -202,7 +204,9 @@ CREATE PROCEDURE verTodasLasMultasPagadasXFecha(
     IN pfechaMultaFin varchar(20)
 )
 BEGIN
-	SELECT * FROM svp_multas_registradas WHERE fechaMulta BETWEEN pfechaMultaInicio AND pfechaMultaFin AND estadoDeLaMulta = 'PAGADO';
+	SELECT tipoPlaca,numeroPlaca,marca,color,lugarInfraccion,nombreTipoMulta,montoInfraccion,montoConDescuento,
+        fechaMulta,mesMulta,estadoDeLaMulta,numeroComprobantePago FROM svp_multas_registradas INNER JOIN svp_tipos_de_multas 
+        ON idTipoMultaFk = idTipoMulta WHERE fechaMulta BETWEEN pfechaMultaInicio AND pfechaMultaFin AND estadoDeLaMulta = 'PAGADO';
 END //
 DELIMITER ;
 
@@ -330,10 +334,11 @@ CREATE PROCEDURE insertarMultas(
     IN pidTipoMultaFk INT,
     IN pfechaMulta varchar(20),
     IN pmesMulta varchar(5),
-    IN pestadoDeLaMulta varchar(10)
+    IN pestadoDeLaMulta varchar(10),
+    IN pnumeroComprobantePago varchar(100)
 )
 BEGIN
-	INSERT INTO `svp_multas_registradas`(`tipoPlaca`, `numeroPlaca`, `marca`, `color`, `lugarInfraccion`, `idTipoMultaFk`, `fechaMulta`, `mesMulta`, `estadoDeLaMulta`) VALUES (ptipoPlaca,pnumeroPlaca,pmarca,pcolor,plugarInfraccion,pidTipoMultaFk,pfechaMulta,pmesmulta,pestadoDeLaMulta);
+	INSERT INTO `svp_multas_registradas`(`tipoPlaca`, `numeroPlaca`, `marca`, `color`, `lugarInfraccion`, `idTipoMultaFk`, `fechaMulta`, `mesMulta`, `estadoDeLaMulta`,`numeroComprobantePago`) VALUES (ptipoPlaca,pnumeroPlaca,pmarca,pcolor,plugarInfraccion,pidTipoMultaFk,pfechaMulta,pmesmulta,pestadoDeLaMulta,pnumeroComprobantePago);
 END //
 DELIMITER ;
 

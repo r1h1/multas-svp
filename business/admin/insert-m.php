@@ -18,6 +18,8 @@
     $sfechamulta = $fechaDeIngreso;
     $smesmulta = $mesIngreso;
     $sestadomulta = "PENDIENTE";
+    $snumeroComprobantePago = "NO EXISTE COMPROBANTE DE PAGO";
+
 
     $smarca = strtoupper($smarca);
     $snumeroplaca = strtoupper($snumeroplaca);
@@ -26,7 +28,7 @@
 
 
     $query = "CALL insertarMultas('$stipoplaca','$snumeroplaca','$smarca','$scolor','$slugarinfraccion','$sidtipomultafk','$sfechamulta',
-                                    '$smesmulta','$sestadomulta');";
+                                    '$smesmulta','$sestadomulta','$snumeroComprobantePago');";
 
 
     $result = mysqli_query($conexion, $query);

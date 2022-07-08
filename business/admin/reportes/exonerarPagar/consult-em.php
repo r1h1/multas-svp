@@ -13,7 +13,8 @@
                     <th scope="col">MONTO</th>
                     <th scope="col">DESCUENTO</th>
                     <th scope="col">TOTAL</th>
-                    <th scope="col">COMPROBANTE DE PAGO</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -22,7 +23,7 @@
 
                 include("../../../../data/conexion-bd.php");
 
-                $sql = "call verTodasLasMultasPagadas();";
+                $sql = "call verTodasLasMultasPendientesPago();";
 
                 $result = mysqli_query($conexion, $sql);
                 while (mysqli_next_result($conexion)) {;
@@ -46,7 +47,7 @@
                         <td><span>Q</span><?php echo $mostrarmpp['montoInfraccion']; ?></td>
                         <td><span>Q</span><?php echo $mostrarmpp['montoConDescuento']; ?></td>
                         <td><span>Q</span><?php echo $totalAPagar; ?></td>
-                        <td class="fw-bold"><?php echo $mostrarmpp['numeroComprobantePago']; ?></td>
+                        <td><button class="btn btn-success" type="submit">Exonerar</button></td>
                         <td><button class="btn btn-danger" type="submit">Borrar</button></td>
                     </tr>
             </tbody>

@@ -243,12 +243,12 @@
                                         <div class="col-md-6 mt-4">
                                             <label for="inputP4" class="form-label">Fecha Inicio</label>
                                             <input type="date" class="form-control" name="fInicio" id="fechaInicio" 
-                                            value="2022-06-27" placeholder="2022/06/27" required>
+                                            value="aaaa-mm-dd" placeholder="2022/06/27" required>
                                         </div>
                                         <div class="col-md-6 mt-4">
                                             <label for="inputP4" class="form-label">Fecha Fin</label>
                                             <input type="date" class="form-control" name="fFin" id="fechaFin" 
-                                            value="2022-06-27" placeholder="2022/06/27" required>
+                                            value="aaaa-mm-dd" placeholder="2022/06/27" required>
                                         </div>
                                         <div class="col-md-12 mt-2">
                                             <button class="btn btn-secondary" type="submit" name="buscarXFechas">Buscar por Fechas</button>
@@ -267,16 +267,15 @@
 
                     <?php
                     
-                    if(isset($_GET["buscarXPlaca"])){
-                        include("../../../../business/admin/reportes/pendientePagos/filter-p.php");
-                    }
-                    if(isset($_GET["buscarXFechas"])){
-                        include("../../../../business/admin/reportes/pendientePagos/filter-date.php");
-                    }
-                    if(!isset($_GET["buscarXFechas"]) && !isset($_GET["buscarXPlaca"])){
-                        include("../../../../business/admin/reportes/pendientePagos/consult-mpp.php");
-                    }
-                    
+                        if(isset($_GET["buscarXPlaca"])){
+                            include("../../../../business/admin/reportes/pendientePagos/filter-p.php");
+                        }
+                        if(isset($_GET["buscarXFechas"])){
+                            include("../../../../business/admin/reportes/pendientePagos/filter-date.php");
+                        }
+                        if(!isset($_GET["buscarXFechas"]) && !isset($_GET["buscarXPlaca"])){
+                            include("../../../../business/admin/reportes/pendientePagos/consult-mpp.php");
+                        }                    
                                                                     
                     ?>
 

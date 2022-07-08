@@ -44,9 +44,9 @@
                         <td><?php echo strtoupper($mostrarmpp['fechaMulta']); ?></td>
                         <td><?php echo strtoupper($mostrarmpp['lugarInfraccion']); ?></td>
                         <td><?php echo strtoupper($mostrarmpp['nombreTipoMulta']); ?></td>
-                        <td><?php echo $mostrarmpp['montoInfraccion']; ?></td>
-                        <td><?php echo $mostrarmpp['montoConDescuento']; ?></td>
-                        <td><?php echo $totalAPagar; ?></td>
+                        <td><span>Q</span><?php echo $mostrarmpp['montoInfraccion']; ?></td>
+                        <td><span>Q</span><?php echo $mostrarmpp['montoConDescuento']; ?></td>
+                        <td><span>Q</span><?php echo $totalAPagar; ?></td>
                         <td><button class="btn btn-secondary" type="submit">Generar Boleta</button></td>
                         <td><button class="btn btn-success" type="submit">Pagar</button></td>
                         <td><button class="btn btn-danger" type="submit">Borrar</button></td>

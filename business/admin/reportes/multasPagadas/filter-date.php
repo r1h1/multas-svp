@@ -13,8 +13,7 @@
                     <th scope="col">MONTO</th>
                     <th scope="col">DESCUENTO</th>
                     <th scope="col">TOTAL</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
+                    <th scope="col">COMPROBANTE DE PAGO</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -31,15 +30,14 @@
 
                 if ($sfInicio > $sfFin) {
                     echo "<script>
-                      Swal.fire({
-                        icon: 'error',
-                        title: 'La fecha de inicio no puede ser mayor a la fecha fin.'
-                      });
-                </script>";
-                } 
-                else {
+                    Swal.fire({
+                      icon: 'error',
+                      title: 'La fecha de inicio no puede ser mayor a la fecha fin.'
+                    });
+              </script>";
+                } else {
 
-                    $sql = "CALL verTodasLasMultasPendientesPagoXFecha('$sfInicio','$sfFin');";
+                    $sql = "CALL verTodasLasMultasPagadasXFecha('$sfInicio','$sfFin');";
 
 
                     $result = mysqli_query($conexion, $sql);
@@ -86,8 +84,7 @@
                             <td><span>Q</span><?php echo $mostrar['montoInfraccion']; ?></td>
                             <td><span>Q</span><?php echo $mostrar['montoConDescuento']; ?></td>
                             <td><span>Q</span><?php echo $totalAPagar; ?></td>
-                            <td><button class="btn btn-secondary" type="submit">Generar Boleta</button></td>
-                            <td><button class="btn btn-success" type="submit">Pagar</button></td>
+                            <td class="fw-bold"><?php echo $mostrar['numeroComprobantePago']; ?></td>
                             <td><button class="btn btn-danger" type="submit">Borrar</button></td>
                         </tr>
             </tbody>
