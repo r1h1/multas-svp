@@ -172,6 +172,10 @@
                         Buscar por Fechas
                     </button>
 
+                    <a href="multas-pagadas" class="btn btn-secondary mt-2">
+                        Ver Todos los Registros
+                    </a>
+
                     <!-- Modal buscar por placas -->
                     <div class="modal fade" id="buscarPorPlacas" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">

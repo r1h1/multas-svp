@@ -172,6 +172,10 @@
                         Buscar por Fechas
                     </button>
 
+                    <a href="multas-pendientes-pago" class="btn btn-secondary mt-2">
+                        Ver Todos los Registros
+                    </a>
+
                     <!-- Modal buscar por placas -->
                     <div class="modal fade" id="buscarPorPlacas" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -183,11 +187,11 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form class="row" action="" method="POST">
+                                    <form class="row" action="" method="GET">
                                         <div class="col-md-6 mt-4">
                                             <label for="inputE4" class="form-label">Tipo de Placa</label>
-                                            <select class="form-select" required title="Seleccione el tipo de placa a consultar..." name="tipoPlaca">
-                                                <option value=" P">P</option>
+                                            <select class="form-select" required name="tipoPlaca">
+                                                <option value="P">P</option>
                                                 <option value="C">C</option>
                                                 <option value="M">M</option>
                                                 <option value="A">A</option>
@@ -212,7 +216,7 @@
                                             title="Ingrese el número de placa a consultar" placeholder="158hrz" required>
                                         </div>
                                         <div class="col-md-12 mt-2 mb-3">
-                                            <button class="btn btn-success" type="submit" id="inputGroupFileAddon04">Buscar por Placa</button>
+                                            <button class="btn btn-success" type="submit" name="buscarXPlaca">Buscar por Placa</button>
                                         </div>
                                     </form>
                                 </div>
@@ -235,7 +239,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="" class="row" method="POST">
+                                    <form action="" class="row" method="GET">
                                         <div class="col-md-6 mt-4">
                                             <label for="inputP4" class="form-label">Fecha Inicio</label>
                                             <input type="date" class="form-control" name="fInicio" id="fechaInicio" 
@@ -247,7 +251,7 @@
                                             value="2022-06-27" placeholder="2022/06/27" required>
                                         </div>
                                         <div class="col-md-12 mt-2">
-                                            <button class="btn btn-secondary" type="submit" id="inputGroupFileAddon04">Buscar por Fechas</button>
+                                            <button class="btn btn-secondary" type="submit" name="buscarXFechas">Buscar por Fechas</button>
                                         </div>
                                     </form>
                                 </div>
@@ -259,10 +263,21 @@
                     </div>
 
 
-                    <hr style="color:#908796;">
+                    <hr style="color:#908796;" class="mt-4">
 
                     <?php
-                        include("../../../../business/admin/reportes/pendientePagos/consult-mpp.php");                                            
+                    
+                    if(isset($_GET["buscarXPlaca"])){
+                        include("../../../../business/admin/reportes/pendientePagos/filter-p.php");
+                    }
+                    if(isset($_GET["buscarXFechas"])){
+                        include("../../../../business/admin/reportes/pendientePagos/filter-date.php");
+                    }
+                    if(!isset($_GET["buscarXFechas"]) && !isset($_GET["buscarXPlaca"])){
+                        include("../../../../business/admin/reportes/pendientePagos/consult-mpp.php");
+                    }
+                    
+                                                                    
                     ?>
 
                     </div>
