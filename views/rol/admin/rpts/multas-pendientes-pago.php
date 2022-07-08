@@ -154,7 +154,7 @@
 
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid w-75">
+                <div class="container-fluid" style="width: 90%;">
 
                     <!-- Page Heading -->
                     <div class="mt-5 mb-5">
@@ -261,48 +261,9 @@
 
                     <hr style="color:#908796;">
 
-                    <div class="w-100 mb-2 mt-5">
-                        <p class="h2-estilo text-gray-800">Listado de Multas Pendientes de Pago</p>
-                        <div class="tabla-info-multas-pendientes-pago table-responsive">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">ID</th>
-                                        <th scope="col">PLACA</th>
-                                        <th scope="col">MARCA</th>
-                                        <th scope="col">COLOR</th>
-                                        <th scope="col">FECHA</th>
-                                        <th scope="col">LUGAR</th>
-                                        <th scope="col">INFRACCION</th>
-                                        <th scope="col">MONTO</th>
-                                        <th scope="col">DESCUENTO</th>
-                                        <th scope="col">TOTAL</th>
-                                        <th scope="col">FOTOGRAFÍA</th>
-                                        <th scope="col"></th>
-                                        <th scope="col"></th>
-                                        <th scope="col"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td><button class="btn btn-secondary" type="submit">Generar Boleta</button></td>
-                                        <td><button class="btn btn-success" type="submit">Pagar</button></td>
-                                        <td><button class="btn btn-danger" type="submit">Borrar</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <?php
+                        include("../../../../business/admin/reportes/pendientePagos/consult-mpp.php");                                            
+                    ?>
 
                     </div>
                     <!-- End of Main Content -->

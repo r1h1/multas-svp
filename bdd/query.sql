@@ -130,7 +130,9 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE verTodasLasMultasPendientesPago()
 BEGIN
-	SELECT * FROM svp_multas_registradas WHERE estadoDeLaMulta = 'PENDIENTE';
+	SELECT tipoPlaca,numeroPlaca,marca,color,lugarInfraccion,nombreTipoMulta,montoInfraccion,montoConDescuento,
+        fechaMulta,mesMulta,estadoDeLaMulta FROM svp_multas_registradas INNER JOIN svp_tipos_de_multas 
+        ON idTipoMultaFk = idTipoMulta WHERE estadoDeLaMulta = 'PENDIENTE';
 END //
 DELIMITER ;
 
