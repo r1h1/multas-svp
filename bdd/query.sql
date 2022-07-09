@@ -111,7 +111,7 @@ CREATE PROCEDURE verMultasPorPlaca(
 BEGIN
 	    SELECT tipoPlaca,numeroPlaca,marca,color,lugarInfraccion,nombreTipoMulta,montoInfraccion,montoConDescuento,
         fechaMulta,mesMulta,estadoDeLaMulta,numeroComprobantePago FROM `svp_multas_registradas` INNER JOIN svp_tipos_de_multas ON idTipoMultaFk = idTipoMulta
-        WHERE tipoPlaca = ptipoPlaca AND numeroPlaca = pnumeroPlaca ORDER BY fechaMulta ASC;
+        WHERE tipoPlaca = ptipoPlaca AND numeroPlaca = pnumeroPlaca AND estadoDeLaMulta = 'PENDIENTE' ORDER BY fechaMulta ASC;
 END //
 DELIMITER ;
 
