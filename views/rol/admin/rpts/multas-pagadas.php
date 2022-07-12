@@ -1,14 +1,14 @@
 <?php
-  session_start();
-  error_reporting(0);
-  $varsesion = $_SESSION['usuario'];
+session_start();
+error_reporting(0);
+$varsesion = $_SESSION['usuario'];
 
-  if($varsesion == null || $varsesion = ''){
-    echo'<script type="text/javascript">
+if ($varsesion == null || $varsesion = '') {
+    echo '<script type="text/javascript">
             window.location.href="../../../404";
     </script>';
     die();
-  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Multas Pagadas | Municipalidad de San Vicente Pacaya</title>
+    <title>Multas Pagadas Y Exoneradas | Municipalidad de San Vicente Pacaya</title>
 
     <!-- Custom fonts for this template-->
     <link href="../../../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -158,7 +158,7 @@
 
                     <!-- Page Heading -->
                     <div class="mt-5 mb-5">
-                        <h1 class="h1-estilo text-gray-800">Multas Pagadas</h1>
+                        <h1 class="h1-estilo text-gray-800">Multas Pagadas y Exoneradas</h1>
                         <p class="p-estilo">Puedes visualizar las multas pagadas, y puedes buscar por placas y fechas.</p>
                     </div>
 
@@ -209,11 +209,8 @@
                                         </div>
                                         <div class="col-md-6 mt-4">
                                             <label for="inputP4" class="form-label">Número de Placa</label>
-                                            <input type="text" class="form-control" name="numeroPlaca" 
-                                            oninput="javascript: if (this.value.length > this.maxLength) 
-                                            this.value = this.value.slice(0, this.maxLength);" 
-                                            style="text-transform:uppercase" maxlength="6" 
-                                            title="Ingrese el número de placa a consultar" placeholder="158hrz" required>
+                                            <input type="text" class="form-control" name="numeroPlaca" oninput="javascript: if (this.value.length > this.maxLength) 
+                                            this.value = this.value.slice(0, this.maxLength);" style="text-transform:uppercase" maxlength="6" title="Ingrese el número de placa a consultar" placeholder="158hrz" required>
                                         </div>
                                         <div class="col-md-12 mt-2 mb-3">
                                             <button class="btn btn-success" type="submit" name="buscarXPlaca">Buscar por Placa</button>
@@ -242,13 +239,11 @@
                                     <form action="" class="row" method="GET">
                                         <div class="col-md-6 mt-4">
                                             <label for="inputP4" class="form-label">Fecha Inicio</label>
-                                            <input type="date" class="form-control" name="fInicio" id="fechaInicio" 
-                                            value="aaaa-mm-dd" placeholder="2022/06/27" required>
+                                            <input type="date" class="form-control" name="fInicio" id="fechaInicio" value="aaaa-mm-dd" placeholder="2022/06/27" required>
                                         </div>
                                         <div class="col-md-6 mt-4">
                                             <label for="inputP4" class="form-label">Fecha Fin</label>
-                                            <input type="date" class="form-control" name="fFin" id="fechaFin" 
-                                            value="aaaa-mm-dd" placeholder="2022/06/27" required>
+                                            <input type="date" class="form-control" name="fFin" id="fechaFin" value="aaaa-mm-dd" placeholder="2022/06/27" required>
                                         </div>
                                         <div class="col-md-12 mt-2">
                                             <button class="btn btn-secondary" type="submit" name="buscarXFechas">Buscar por Fechas</button>
@@ -263,77 +258,97 @@
                     </div>
 
 
+                    <!-- Modal borrar multa -->
+                    <div class="modal fade" id="borrarUnaMulta" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Borrar una multa</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="row" action="" method="GET">    
+                                        <p class="form-label">Una vez borrado, no se podrá recuperar la multa.</p>                                    
+                                        <div class="col-md-12 mt-2 mb-3">
+                                            <button class="btn btn-danger" type="submit" name="borrarMulta">Borrar</button>
+                                            <a href="multas-pagadas" class="btn btn-secondary">Cancelar</a>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <!-- vacio -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                     <hr style="color:#908796;">
 
                     <?php
-                    
-                        if(isset($_GET["buscarXPlaca"])){
-                            include("../../../../business/admin/reportes/multasPagadas/filter-p.php");
-                        }
-                        if(isset($_GET["buscarXFechas"])){
-                            include("../../../../business/admin/reportes/multasPagadas/filter-date.php");
-                        }
-                        if(!isset($_GET["buscarXFechas"]) && !isset($_GET["buscarXPlaca"])){
-                            include("../../../../business/admin/reportes/multasPagadas/consult-mp.php");
-                        }                    
-                                                                    
+
+                    if (isset($_GET["buscarXPlaca"])) {
+                        include("../../../../business/admin/reportes/multasPagadas/filter-p.php");
+                    }
+                    if (isset($_GET["buscarXFechas"])) {
+                        include("../../../../business/admin/reportes/multasPagadas/filter-date.php");
+                    }
+                    if (!isset($_GET["buscarXFechas"]) && !isset($_GET["buscarXPlaca"])) {
+                        include("../../../../business/admin/reportes/multasPagadas/consult-mp.php");
+                    }
+
+                    if(isset($_GET["borrarMulta"])){
+                        include("../../../../business/admin/reportes/pendientePagos/delete-m.php");
+                    }
+
                     ?>
 
-                        <div class="row mt-5">
-                            <div class="col-md-4 mt-4">
-                                <label for="inputP4" class="form-label">Total de Multas Pagadas</label>
-                                <input type="text" class="form-control" name="totalMultasPagadas" placeholder="0.00" readonly>
-                            </div>
-                            <div class="col-md-4 mt-4">
-                                <label for="inputP4" class="form-label">Total Recaudado</label>
-                                <input type="text" class="form-control" name="totalMultasPagadas" placeholder="0.00" readonly>
-                            </div>
-                        </div>
-
-                    </div>
-                    <!-- End of Main Content -->
-
-
-                    <!-- Footer -->
-                    <footer class="sticky-footer footer-spacings bg-white">
-                        <div class="container my-auto">
-                            <div class="copyright text-center my-auto">
-                                <span>© Todos los Derechos reservados, Municipalidad de San Vicente Pacaya, Escuintla, Guatemala</span>
-                                <br> <br>
-                                <span>https://www.munisanvicentepacaya.laip.gt/</span>
-                            </div>
-                        </div>
-                    </footer>
-                    <!-- End of Footer -->
-
                 </div>
-                <!-- End of Content Wrapper -->
+                <!-- End of Main Content -->
+
+
+                <!-- Footer -->
+                <footer class="sticky-footer footer-spacings bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>© Todos los Derechos reservados, Municipalidad de San Vicente Pacaya, Escuintla, Guatemala</span>
+                            <br> <br>
+                            <span>https://www.munisanvicentepacaya.laip.gt/</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
 
             </div>
-            <!-- End of Page Wrapper -->
+            <!-- End of Content Wrapper -->
 
-            <!-- Scroll to Top Button-->
-            <a class="scroll-to-top rounded" href="#page-top">
-                <i class="fas fa-angle-up"></i>
-            </a>
+        </div>
+        <!-- End of Page Wrapper -->
+
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
 
-            <!-- Bootstrap Bundle with Popper -->
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-            <!-- Bootstrap core JavaScript-->
-            <script src="../../../../vendor/jquery/jquery.min.js"></script>
-            <script src="../../../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Bootstrap Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <!-- Bootstrap core JavaScript-->
+        <script src="../../../../vendor/jquery/jquery.min.js"></script>
+        <script src="../../../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-            <!-- Core plugin JavaScript-->
-            <script src="../../../../vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="../../../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
-            <!-- Custom scripts for all pages-->
-            <script src="../../../../js/sb-admin-2.min.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="../../../../js/sb-admin-2.min.js"></script>
 
-            <!-- Page level plugins -->
-            <script src="../../../../vendor/chart.js/Chart.min.js"></script>
+        <!-- Page level plugins -->
+        <script src="../../../../vendor/chart.js/Chart.min.js"></script>
 
-            <script src="../../../../js/main.js"></script>
+        <script src="../../../../js/main.js"></script>
 
 </body>
 

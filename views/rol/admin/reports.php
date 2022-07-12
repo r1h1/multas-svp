@@ -187,7 +187,7 @@
                             <div class="card shadow mb-4 border-left-success">
                                 <a href="rpts/multas-pagadas" class="nav-link">
                                     <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">MULTAS PAGADAS</h6>
+                                        <h6 class="m-0 font-weight-bold text-primary">MULTAS PAGADAS / EXONERADAS</h6>
                                     </div>
                                     <div class="card-body text-center">
                                         <i class="fa-solid fa-car" style="font-size: 90px; color: #858796;"></i>

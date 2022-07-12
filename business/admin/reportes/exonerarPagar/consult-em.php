@@ -29,15 +29,30 @@
                 while (mysqli_next_result($conexion)) {;
                 }
 
+                $numero_filas = mysqli_num_rows($result);
+
+                    if ($numero_filas == 0) {
+                        echo "<script>
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'No se encontró información'
+                          })
+                    </script>";
+                    } else {
+                        //
+                    }
+
                 while ($mostrarmpp = mysqli_fetch_array($result)) {
 
                 $tipop = strtoupper($mostrarmpp['tipoPlaca']);
                 $numerop = strtoupper($mostrarmpp['numeroPlaca']);
 
                 $totalAPagar = $mostrarmpp['montoInfraccion'] - $mostrarmpp['montoConDescuento'];
+                $idMulta = $mostrarmpp['idMulta'];
 
                 ?>
                     <tr>
+                        <td hidden><?php echo $idMulta; ?></td>
                         <td><?php echo $tipop, "-", $numerop; ?></td>
                         <td><?php echo strtoupper($mostrarmpp['marca']); ?></td>
                         <td><?php echo strtoupper($mostrarmpp['color']); ?></td>
@@ -47,8 +62,8 @@
                         <td><span>Q</span><?php echo $mostrarmpp['montoInfraccion']; ?></td>
                         <td><span>Q</span><?php echo $mostrarmpp['montoConDescuento']; ?></td>
                         <td><span>Q</span><?php echo $totalAPagar; ?></td>
-                        <td><button class="btn btn-success" type="submit">Exonerar</button></td>
-                        <td><button class="btn btn-danger" type="submit">Borrar</button></td>
+                        <td><button class="btn btn-success" type="submit"  data-toggle="modal" data-target="#exonerarUnaMulta">Exonerar</button></td>
+                        <td><button class="btn btn-danger" type="submit" data-toggle="modal" data-target="#borrarUnaMulta">Borrar</button></td>
                     </tr>
             </tbody>
         <?php

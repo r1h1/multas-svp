@@ -29,9 +29,21 @@
                 while (mysqli_next_result($conexion)) {;
                 }
 
+                $numero_filas = mysqli_num_rows($result);
+
+                    if ($numero_filas == 0) {
+                        echo "<script>
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'No se encontró información'
+                          })
+                    </script>";
+                    } else {
+                        //
+                    }
+
                 while ($mostrarmpp = mysqli_fetch_array($result)) {
 
-                $id = $mostrarmpp[''];
                 $tipop = strtoupper($mostrarmpp['tipoPlaca']);
                 $numerop = strtoupper($mostrarmpp['numeroPlaca']);
 
@@ -52,7 +64,7 @@
                         <td><span>Q</span><?php echo $totalAPagar; ?></td>                        
                         <td><a href="../../logica-pagos/" class="btn btn-secondary">Generar Boleta</a></td>
                         <td><button class="btn btn-success" type="submit" data-toggle="modal" data-target="#pagarUnaMulta">Pagar</button></td>
-                        <td><button class="btn btn-danger" type="submit">Borrar</button></td>
+                        <td><button class="btn btn-danger" type="submit" data-toggle="modal" data-target="#borrarUnaMulta">Borrar</button></td>
                     </tr>
             </tbody>
         <?php

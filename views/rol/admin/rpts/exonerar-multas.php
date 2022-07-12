@@ -262,6 +262,57 @@ if ($varsesion == null || $varsesion = '') {
                         </div>
                     </div>
 
+                    <!-- Modal exonerar Multa -->
+                    <div class="modal fade" id="exonerarUnaMulta" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Exonerar Una Multa</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="row" action="" method="GET">                                 
+                                        <p class="form-label">Una vez exonerado, no se podrá recuperar la multa.</p>
+                                        <div class="col-md-12 mt-2 mb-3">
+                                            <button class="btn btn-danger" type="submit" name="exonerarMulta">Exonerar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <!-- vacio -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal borrar multa -->
+                    <div class="modal fade" id="borrarUnaMulta" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Borrar una multa</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="row" action="" method="GET">    
+                                        <p class="form-label">Una vez borrado, no se podrá recuperar la multa.</p>                                    
+                                        <div class="col-md-12 mt-2 mb-3">
+                                            <button class="btn btn-danger" type="submit" name="borrarMulta">Borrar</button>
+                                            <a href="exonerar-multas" class="btn btn-secondary">Cancelar</a>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <!-- vacio -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
 
                     <hr style="color:#908796;">
 
@@ -275,6 +326,14 @@ if ($varsesion == null || $varsesion = '') {
                     }
                     if (!isset($_GET["buscarXFechas"]) && !isset($_GET["buscarXPlaca"])) {
                         include("../../../../business/admin/reportes/exonerarPagar/consult-em.php");
+                    }
+
+                    if(isset($_GET["exonerarMulta"])){
+                        include("../../../../business/admin/reportes/exonerarPagar/pay-m.php");
+                    }
+
+                    if(isset($_GET["borrarMulta"])){
+                        include("../../../../business/admin/reportes/exonerarPagar/delete-m.php");
                     }
 
                     ?>

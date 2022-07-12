@@ -174,9 +174,9 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE verTodasLasMultasPagadas()
 BEGIN
-	SELECT idMulta,tipoPlaca,numeroPlaca,marca,color,lugarInfraccion,nombreTipoMulta,montoInfraccion,montoConDescuento,
-        fechaMulta,mesMulta,estadoDeLaMulta,numeroComprobantePago FROM svp_multas_registradas INNER JOIN svp_tipos_de_multas 
-        ON idTipoMultaFk = idTipoMulta WHERE estadoDeLaMulta = 'PAGADO';
+	SELECT idMulta,tipoPlaca,numeroPlaca,marca,color,lugarInfraccion,nombreTipoMulta,montoInfraccion,montoConDescuento, 
+    fechaMulta,mesMulta,estadoDeLaMulta,numeroComprobantePago FROM svp_multas_registradas 
+    INNER JOIN svp_tipos_de_multas ON idTipoMultaFk = idTipoMulta WHERE estadoDeLaMulta = 'PAGADO' OR estadoDeLaMulta = 'EXONERADO';
 END //
 DELIMITER ;
 
@@ -242,7 +242,7 @@ CREATE PROCEDURE pagarUnaMulta(
     IN pnumeroComprobantePago varchar(100)
 )
 BEGIN
-	UPDATE `svp_multas_registradas` SET `estadoDeLaMulta`='PAGADO',`numeroComprobantePago`= pnumeroComprobantePago WHERE idMulta = pidMulta;
+	UPDATE `svp_multas_registradas` SET `estadoDeLaMulta`='EXONERADO', numeroComprobantePago = 'EXONERADO' WHERE idMulta = pidMulta;
 END //
 DELIMITER ;
 

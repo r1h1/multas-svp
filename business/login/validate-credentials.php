@@ -8,6 +8,8 @@ $sClave = $_POST['clave'];
 
 $sql = "CALL logueoSistemaMultasSvp('$sUsuario','$sClave');";
 $resultado = mysqli_query($conexion, $sql);
+while (mysqli_next_result($conexion)) {;
+}
 $filas = mysqli_num_rows($resultado);
 
 
@@ -23,6 +25,20 @@ if ($filas > 0) {
     session_start();
     $_SESSION["usuario"] = $sUsuario;
 
+    //obtenemos datos del cliente (fecha, hora, ip etc)
+    date_default_timezone_set('America/Guatemala');
+    $fechaDeIngreso = date('d-m-Y', time());
+    $horaIngreso = date('h:i:s a', time());
+    $soIngreso = php_uname();
+    $ipIngreso = $_SERVER['REMOTE_ADDR'];
+
+    //llamamos al stored procedure para insertar el log de inicio de sesión
+    $sql = "CALL insertarLogIngresoSistema('$sUsuario','$fechaDeIngreso','$horaIngreso','$soIngreso','$ipIngreso');";
+    $result = mysqli_query($conexion, $sql);
+    while (mysqli_next_result($conexion)) {;
+    }
+
+    //si el permiso es "xxxx" entonces se redirige a "xxxx"
     if ($permiso == 'admin') {
         header("location:../../views/rol/admin/dashboard");
     } else if ($permiso == 'policia') {
@@ -40,5 +56,8 @@ else {
 
 //LIBERAR MEMORIA DE LOS DATOS
 mysqli_free_result($resultado);
+mysqli_free_result($result);
+
+clearstatcache();
 
 ?>
