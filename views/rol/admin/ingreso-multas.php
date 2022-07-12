@@ -193,9 +193,9 @@
                                  title="Ingrese el número de placa a consultar" placeholder="158hrz" required>
                             </div>
                             <div class="col-md-4 mt-4">
-                                <label for="inputP4" class="form-label">Marca</label>
+                                <label for="inputP4" class="form-label">Marca y Línea</label>
                                 <input type="text" class="form-control" name="marca" style="text-transform:uppercase"
-                                placeholder="mazda" required>
+                                placeholder="mazda cx-5" required>
                             </div>
                             <div class="col-md-4 mt-4">
                                 <label for="inputP4" class="form-label">Color</label>

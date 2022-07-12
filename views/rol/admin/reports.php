@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dashboard | Municipalidad de San Vicente Pacaya</title>
+    <title>Reportería | Municipalidad de San Vicente Pacaya</title>
 
     <!-- Custom fonts for this template-->
     <link href="../../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

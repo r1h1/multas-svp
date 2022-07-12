@@ -22,7 +22,7 @@ if ($varsesion == null || $varsesion = '') {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Multas Pendientes de Pago | Municipalidad de San Vicente Pacaya</title>
+    <title>Exoneración y Pago | Municipalidad de San Vicente Pacaya</title>
 
     <!-- Custom fonts for this template-->
     <link href="../../../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

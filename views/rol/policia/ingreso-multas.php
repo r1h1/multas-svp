@@ -99,10 +99,10 @@
                     title="Ingrese el número de placa" placeholder="158HRZ" required>
                 </div>
                 <div class="col-md-4 mt-4">
-                    <label for="inputP4" class="form-label">Marca</label>
+                    <label for="inputP4" class="form-label">Marca y Línea</label>
                     <input type="text" class="form-control" name="marca" 
                     oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" 
-                    style="text-transform:uppercase" maxlength="50" title="Ingrese la marca del vehículo" placeholder="Mazda" required>
+                    style="text-transform:uppercase" maxlength="50" title="Ingrese la marca del vehículo" placeholder="Mazda cx-5" required>
                 </div>
                 <div class="col-md-4 mt-4">
                     <label for="inputP4" class="form-label">Color</label>

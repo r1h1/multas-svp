@@ -263,6 +263,39 @@
                     </div>
 
 
+                    <!-- Modal pagar multa -->
+                    <div class="modal fade" id="pagarUnaMulta" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Pago de Multa</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="row" action="" method="GET">                                        
+                                        <div class="col-md-12 mt-4">
+                                            <label for="inputP4" class="form-label">Comprobante de Pago</label>
+                                            <input type="text" class="form-control" name="comprobantePago" 
+                                            oninput="javascript: if (this.value.length > this.maxLength) 
+                                            this.value = this.value.slice(0, this.maxLength);" 
+                                            style="text-transform:uppercase" maxlength="20" 
+                                            placeholder="XXXXXXXXXX" required>
+                                        </div>
+                                        <div class="col-md-12 mt-2 mb-3">
+                                            <button class="btn btn-danger" type="submit" name="pagarMulta">Pagar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <!-- vacio -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                     <hr style="color:#908796;" class="mt-4">
 
                     <?php
@@ -275,7 +308,11 @@
                         }
                         if(!isset($_GET["buscarXFechas"]) && !isset($_GET["buscarXPlaca"])){
                             include("../../../../business/admin/reportes/pendientePagos/consult-mpp.php");
-                        }                    
+                        }  
+
+                        if(isset($_GET["pagarMulta"])){
+                            include("../../../../business/admin/reportes/pendientePagos/pay-m.php");
+                        }
                                                                     
                     ?>
 
