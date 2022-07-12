@@ -215,26 +215,6 @@ if ($varsesion == null || $varsesion = '') {
                                 <?php 
                                     include("../../../business/admin/consult-m.php");
                                 ?>
-                            </table>
-
-                            <a href="#" class="btn btn-success">Generar Boleta</a>
-                    </section>
-
-                </div>
-                <!-- End of Main Content -->
-
-                <!-- Footer -->
-                <footer class="sticky-footer bg-white">
-                    <div class="container my-auto">
-                        <div class="copyright text-center my-auto">
-                            <span>© Todos los Derechos reservados, Municipalidad de San Vicente Pacaya, Escuintla, Guatemala</span>
-                            <br> <br>
-                            <span>https://www.munisanvicentepacaya.laip.gt/</span>
-                        </div>
-                    </div>
-                </footer>
-                <!-- End of Footer -->
-
             </div>
             <!-- End of Content Wrapper -->
 

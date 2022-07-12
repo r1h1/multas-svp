@@ -31,24 +31,24 @@
 
                 $numero_filas = mysqli_num_rows($result);
 
-                    if ($numero_filas == 0) {
-                        echo "<script>
+                if ($numero_filas == 0) {
+                    echo "<script>
                         Swal.fire({
                             icon: 'info',
                             title: 'No se encontró información'
                           })
                     </script>";
-                    } else {
-                        //
-                    }
+                } else {
+                    //
+                }
 
                 while ($mostrarmpp = mysqli_fetch_array($result)) {
 
-                $tipop = strtoupper($mostrarmpp['tipoPlaca']);
-                $numerop = strtoupper($mostrarmpp['numeroPlaca']);
+                    $tipop = strtoupper($mostrarmpp['tipoPlaca']);
+                    $numerop = strtoupper($mostrarmpp['numeroPlaca']);
 
-                $totalAPagar = $mostrarmpp['montoInfraccion'] - $mostrarmpp['montoConDescuento'];
-                $idMulta = $mostrarmpp['idMulta'];
+                    $totalAPagar = $mostrarmpp['montoInfraccion'] - $mostrarmpp['montoConDescuento'];
+                    $idMulta = $mostrarmpp['idMulta'];
 
                 ?>
                     <tr>
@@ -61,8 +61,12 @@
                         <td><?php echo strtoupper($mostrarmpp['nombreTipoMulta']); ?></td>
                         <td><span>Q</span><?php echo $mostrarmpp['montoInfraccion']; ?></td>
                         <td><span>Q</span><?php echo $mostrarmpp['montoConDescuento']; ?></td>
-                        <td><span>Q</span><?php echo $totalAPagar; ?></td>                        
-                        <td><a href="../../logica-pagos/" class="btn btn-secondary">Generar Boleta</a></td>
+                        <td><span>Q</span><?php echo $totalAPagar; ?></td>
+                        <td><form action="../../../boleta-multa" method="POST" target="_blank">
+                            <input type="text" value="<?php echo $tipop; ?>" name="tipoPc" required hidden>
+                            <input type="text" value="<?php echo $numerop; ?>" name="numeroPlaca" required hidden>
+                            <button type="submit" class="btn btn-secondary">Generar Boleta</button>
+                        </form></td>
                         <td><button class="btn btn-success" type="submit" data-toggle="modal" data-target="#pagarUnaMulta">Pagar</button></td>
                         <td><button class="btn btn-danger" type="submit" data-toggle="modal" data-target="#borrarUnaMulta">Borrar</button></td>
                     </tr>

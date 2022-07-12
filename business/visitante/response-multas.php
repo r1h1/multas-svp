@@ -20,6 +20,16 @@
 
                     $sTipoDePlaca = $_POST["placaTipo"];
 
+                    if($sNumeroPlaca == ''){
+                        echo "<script>
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Para ver las multas, debe primero consultar la placa.'
+                          })
+                    </script>";
+                    }
+                    else{
 
                     $sql = "CALL verMultasPorPlaca('$sTipoDePlaca','$sNumeroPlaca');";
 
@@ -51,6 +61,7 @@
 
                     while ($mostrar = mysqli_fetch_array($result)) {
 
+                        $id = $mostrar['idMulta'];
                         $monto = $mostrar['montoInfraccion'];
                         $montoConDescuento = $mostrar['montoConDescuento'];
 
@@ -103,14 +114,18 @@
             <?php
 
                     }
+                }
 
                     clearstatcache();
 
             ?>
             </table>
-            <div class="cmt-2">
-                <a href="#" class="btn btn-success">Generar Boleta</a>
-                <a href="../views/visitante" class="btn btn-dark">Regresar</a>
+            <div class="mt-2">
+                <form action="../views/boleta-multa" method="POST" target="_blank">
+                    <input type="text" value="<?php echo $sTipoDePlaca; ?>" name="tipoPc" required hidden>
+                    <input type="text" value="<?php echo $sNumeroPlaca; ?>" name="numeroPlaca" required hidden>
+                    <button type="submit" class="btn btn-success">Generar Boleta</button>
+                </form>
             </div>
     </section>
 </div>
@@ -142,5 +157,7 @@ if ($numeroPlacaCompleto == "") {
     while (mysqli_next_result($conexion)) {;
     }
 }
+
+clearstatcache();
 
 ?>

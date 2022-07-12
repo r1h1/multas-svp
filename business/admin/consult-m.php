@@ -55,33 +55,55 @@ while ($mostrar = mysqli_fetch_array($result)) {
             <td><?php echo $color; ?></td>
         </tr>
     </tbody>
-</table>
-</div>
-</section>
-<section class="mt-5 detalle-infraccion" id="detalleMultas">
-<p class="h2-estilo ">Detalle de la infracción</p>
-<div class="tabla-info-vehiculo table-responsive">
-<table class="table table-bordered">
-<thead>
-    <tr>
-        <th scope="col">FECHA</th>
-        <th scope="col">LUGAR</th>
-        <th scope="col">INFRACCIÓN</th>
-        <th scope="col">MONTO</th>
-        <th scope="col">DESCUENTO</th>
-        <th scope="col">TOTAL A PAGAR</th>
-    </tr>
-</thead>
-<tbody>
-    <tr>
-        <td><?php echo $mostrar['fechaMulta']; ?></td>
-        <td><?php echo $lugar; ?></td>
-        <td class="fw-bold text-decoration-underline"><?php echo $mostrar['nombreTipoMulta']; ?></td>
-        <td><span>Q</span><?php echo $mostrar['montoInfraccion']; ?></td>
-        <td><span>Q</span><?php echo $mostrar['montoConDescuento']; ?></td>
-        <td><span>Q</span><?php echo $totalAPagar; ?></td>
-    </tr>
-</tbody>
+    </table>
+    </div>
+    </section>
+    <section class="mt-5 detalle-infraccion" id="detalleMultas">
+        <p class="h2-estilo ">Detalle de la infracción</p>
+        <div class="tabla-info-vehiculo table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">FECHA</th>
+                        <th scope="col">LUGAR</th>
+                        <th scope="col">INFRACCIÓN</th>
+                        <th scope="col">MONTO</th>
+                        <th scope="col">DESCUENTO</th>
+                        <th scope="col">TOTAL A PAGAR</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><?php echo $mostrar['fechaMulta']; ?></td>
+                        <td><?php echo $lugar; ?></td>
+                        <td class="fw-bold text-decoration-underline"><?php echo $mostrar['nombreTipoMulta']; ?></td>
+                        <td><span>Q</span><?php echo $mostrar['montoInfraccion']; ?></td>
+                        <td><span>Q</span><?php echo $mostrar['montoConDescuento']; ?></td>
+                        <td><span>Q</span><?php echo $totalAPagar; ?></td>
+                    </tr>
+                </tbody>
+            </table>
+            <form action="../../boleta-multa" method="POST" target="_blank">
+                <input type="text" value="<?php echo $sTipoDePlaca; ?>" name="tipoPc" required hidden>
+                <input type="text" value="<?php echo $sNumeroPlaca; ?>" name="numeroPlaca" required hidden>
+                <button type="submit" class="btn btn-success">Generar Boleta</button>
+            </form>
+    </section>
+
+    </div>
+    <!-- End of Main Content -->
+
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>© Todos los Derechos reservados, Municipalidad de San Vicente Pacaya, Escuintla, Guatemala</span>
+                <br> <br>
+                <span>https://www.munisanvicentepacaya.laip.gt/</span>
+            </div>
+        </div>
+    </footer>
+    <!-- End of Footer -->
 <?php
 
 }
