@@ -115,15 +115,7 @@ $horaIngreso = date('h:i:s a', time());
         <div class="row text-center mt-5">
             <div class="col">
                 <hr>
-                <p class="h6">Banco Industrial - Cuenta Monetaria No. xxxxxx</p>
-            </div>
-            <div class="col">
-                <hr>
-                <p class="h6">Banco Banrural - Cuenta Monetaria No. xxxxxx</p>
-            </div>
-            <div class="col">
-            <hr>
-                <p class="h6">Banco G&T - Cuenta Monetaria No. xxxxxx</p>
+                <p class="h6">CUENTA ÚNICA DEL TESORO SAN VICENTE PACAYA, ESCUINTLA No. 3-654-00034-5</p>
             </div>
             <hr>
         </div>
