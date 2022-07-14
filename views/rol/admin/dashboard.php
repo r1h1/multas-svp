@@ -161,11 +161,13 @@ if ($varsesion == null || $varsesion = '') {
 
                     <!-- Content Row -->
                     <div class="row mb-5">
-                        <?php 
-                        
-                            include("../../../business/admin/dashboard-c.php");
-                        ?>                 
+                        <?php
+
+                        include("../../../business/admin/dashboard-c.php");
+                        ?>
                     </div>
+
+                    
 
                     <!-- Content Row -->
                     <div class="row">

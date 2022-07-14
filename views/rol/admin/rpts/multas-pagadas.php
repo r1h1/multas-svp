@@ -258,33 +258,6 @@ if ($varsesion == null || $varsesion = '') {
                     </div>
 
 
-                    <!-- Modal borrar multa -->
-                    <div class="modal fade" id="borrarUnaMulta" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">Borrar una multa</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form class="row" action="" method="GET">    
-                                        <p class="form-label">Una vez borrado, no se podrá recuperar la multa.</p>                                    
-                                        <div class="col-md-12 mt-2 mb-3">
-                                            <button class="btn btn-danger" type="submit" name="borrarMulta">Borrar</button>
-                                            <a href="multas-pagadas" class="btn btn-secondary">Cancelar</a>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <!-- vacio -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
                     <hr style="color:#908796;">
 
                     <?php
@@ -297,10 +270,6 @@ if ($varsesion == null || $varsesion = '') {
                     }
                     if (!isset($_GET["buscarXFechas"]) && !isset($_GET["buscarXPlaca"])) {
                         include("../../../../business/admin/reportes/multasPagadas/consult-mp.php");
-                    }
-
-                    if(isset($_GET["borrarMulta"])){
-                        include("../../../../business/admin/reportes/pendientePagos/delete-m.php");
                     }
 
                     ?>

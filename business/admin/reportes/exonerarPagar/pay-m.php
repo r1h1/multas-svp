@@ -3,7 +3,9 @@
     error_reporting(0);
     include("../../../../data/conexion-bd.php");
 
-    $sql = "call exonerarUnaMulta('$idMulta');";
+    $id = $_GET['IDE'];
+
+    $sql = "call exonerarUnaMulta('$id');";
 
     $result = mysqli_query($conexion, $sql);
     while (mysqli_next_result($conexion)) {;

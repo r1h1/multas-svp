@@ -3,7 +3,9 @@
     error_reporting(0);
     include("../../../../data/conexion-bd.php");
 
-    $sql = "call eliminarMultas('$idMulta');";
+    $id = $_GET['IDB'];
+
+    $sql = "call eliminarMultas('$id');";
 
     $result = mysqli_query($conexion, $sql);
     while (mysqli_next_result($conexion)) {;

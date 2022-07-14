@@ -30,24 +30,24 @@
 
                 $numero_filas = mysqli_num_rows($result);
 
-                    if ($numero_filas == 0) {
-                        echo "<script>
+                if ($numero_filas == 0) {
+                    echo "<script>
                         Swal.fire({
                             icon: 'info',
                             title: 'No se encontró información'
                           })
                     </script>";
-                    } else {
-                        //
-                    }
+                } else {
+                    //
+                }
 
                 while ($mostrarmpp = mysqli_fetch_array($result)) {
 
-                $tipop = strtoupper($mostrarmpp['tipoPlaca']);
-                $numerop = strtoupper($mostrarmpp['numeroPlaca']);
+                    $tipop = strtoupper($mostrarmpp['tipoPlaca']);
+                    $numerop = strtoupper($mostrarmpp['numeroPlaca']);
 
-                $totalAPagar = $mostrarmpp['montoInfraccion'] - $mostrarmpp['montoConDescuento'];
-                $idMulta = $mostrarmpp['idMulta'];
+                    $totalAPagar = $mostrarmpp['montoInfraccion'] - $mostrarmpp['montoConDescuento'];
+                    $idMulta = $mostrarmpp['idMulta'];
 
                 ?>
                     <tr>
@@ -62,7 +62,7 @@
                         <td><span>Q</span><?php echo $mostrarmpp['montoConDescuento']; ?></td>
                         <td><span>Q</span><?php echo $totalAPagar; ?></td>
                         <td class="fw-bold"><?php echo $mostrarmpp['numeroComprobantePago']; ?></td>
-                        <td><button class="btn btn-danger" type="submit" data-toggle="modal" data-target="#borrarUnaMulta">Borrar</button></td>
+                        <td><a href="multas-pagadas?borrarMulta&IDB=<?php echo $idMulta; ?>" class="btn btn-danger" name="borrarMulta">Borrar</a></td>
                     </tr>
             </tbody>
         <?php
@@ -72,3 +72,11 @@
         ?>
         </table>
     </div>
+
+    <?php
+
+    if (isset($_GET["borrarMulta"])) {
+        include("../../../../business/admin/reportes/multasPagadas/delete-m.php");
+    }
+
+    ?>

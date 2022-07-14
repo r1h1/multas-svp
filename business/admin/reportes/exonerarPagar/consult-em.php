@@ -31,24 +31,24 @@
 
                 $numero_filas = mysqli_num_rows($result);
 
-                    if ($numero_filas == 0) {
-                        echo "<script>
+                if ($numero_filas == 0) {
+                    echo "<script>
                         Swal.fire({
                             icon: 'info',
                             title: 'No se encontró información'
                           })
                     </script>";
-                    } else {
-                        //
-                    }
+                } else {
+                    //
+                }
 
                 while ($mostrarmpp = mysqli_fetch_array($result)) {
 
-                $tipop = strtoupper($mostrarmpp['tipoPlaca']);
-                $numerop = strtoupper($mostrarmpp['numeroPlaca']);
+                    $tipop = strtoupper($mostrarmpp['tipoPlaca']);
+                    $numerop = strtoupper($mostrarmpp['numeroPlaca']);
 
-                $totalAPagar = $mostrarmpp['montoInfraccion'] - $mostrarmpp['montoConDescuento'];
-                $idMulta = $mostrarmpp['idMulta'];
+                    $totalAPagar = $mostrarmpp['montoInfraccion'] - $mostrarmpp['montoConDescuento'];
+                    $idMulta = $mostrarmpp['idMulta'];
 
                 ?>
                     <tr>
@@ -62,8 +62,8 @@
                         <td><span>Q</span><?php echo $mostrarmpp['montoInfraccion']; ?></td>
                         <td><span>Q</span><?php echo $mostrarmpp['montoConDescuento']; ?></td>
                         <td><span>Q</span><?php echo $totalAPagar; ?></td>
-                        <td><button class="btn btn-success" type="submit"  data-toggle="modal" data-target="#exonerarUnaMulta">Exonerar</button></td>
-                        <td><button class="btn btn-danger" type="submit" data-toggle="modal" data-target="#borrarUnaMulta">Borrar</button></td>
+                        <td><a href="exonerar-multas?exonerarMulta&IDE=<?php echo $idMulta; ?>" class="btn btn-success" name="exonerarMulta">Exonerar</a></td>
+                        <td><a href="exonerar-multas?borrarMulta&IDB=<?php echo $idMulta; ?>" class="btn btn-danger" name="borrarMulta">Borrar</a></td>
                     </tr>
             </tbody>
         <?php
@@ -73,3 +73,15 @@
         ?>
         </table>
     </div>
+
+    <?php
+
+    if (isset($_GET["exonerarMulta"])) {
+        include("../../../../business/admin/reportes/exonerarPagar/pay-m.php");
+    }
+
+    if (isset($_GET["borrarMulta"])) {
+        include("../../../../business/admin/reportes/exonerarPagar/delete-m.php");
+    }
+
+    ?>

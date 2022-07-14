@@ -117,6 +117,7 @@ DELIMITER ;
 
 
 
+
 -- procedimiento para mostrar solo multas pendientes de pago
 DELIMITER //
 CREATE PROCEDURE verTodasLasMultasPendientesPago()
@@ -191,7 +192,8 @@ CREATE PROCEDURE verTodasLasMultasPagadasXPlaca(
 BEGIN
 	SELECT idMulta,tipoPlaca,numeroPlaca,marca,color,lugarInfraccion,nombreTipoMulta,montoInfraccion,montoConDescuento,
         fechaMulta,mesMulta,estadoDeLaMulta,numeroComprobantePago FROM svp_multas_registradas INNER JOIN svp_tipos_de_multas 
-        ON idTipoMultaFk = idTipoMulta WHERE tipoPlaca = ptipoPlaca AND numeroPlaca = pnumeroPlaca AND estadoDeLaMulta = 'PAGADO';
+        ON idTipoMultaFk = idTipoMulta WHERE tipoPlaca = ptipoPlaca AND numeroPlaca = pnumeroPlaca AND estadoDeLaMulta = 'PAGADO'
+        OR estadoDeLaMulta = 'EXONERADO';
 END //
 DELIMITER ;
 
@@ -206,7 +208,8 @@ CREATE PROCEDURE verTodasLasMultasPagadasXFecha(
 BEGIN
 	SELECT idMulta,tipoPlaca,numeroPlaca,marca,color,lugarInfraccion,nombreTipoMulta,montoInfraccion,montoConDescuento,
         fechaMulta,mesMulta,estadoDeLaMulta,numeroComprobantePago FROM svp_multas_registradas INNER JOIN svp_tipos_de_multas 
-        ON idTipoMultaFk = idTipoMulta WHERE fechaMulta BETWEEN pfechaMultaInicio AND pfechaMultaFin AND estadoDeLaMulta = 'PAGADO';
+        ON idTipoMultaFk = idTipoMulta WHERE fechaMulta BETWEEN pfechaMultaInicio AND pfechaMultaFin AND estadoDeLaMulta = 'PAGADO'
+        OR estadoDeLaMulta = 'EXONERADO';
 END //
 DELIMITER ;
 

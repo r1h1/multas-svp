@@ -72,9 +72,11 @@
                         $numerop = strtoupper($mostrar['numeroPlaca']);
 
                         $totalAPagar = $mostrar['montoInfraccion'] - $mostrar['montoConDescuento'];
+                        $idMulta = $mostrar['idMulta'];
 
                 ?>
                         <tr>
+                            <td hidden><?php echo $idMulta; ?></td>
                             <td><?php echo $tipop, "-", $numerop; ?></td>
                             <td><?php echo strtoupper($mostrar['marca']); ?></td>
                             <td><?php echo strtoupper($mostrar['color']); ?></td>
@@ -85,7 +87,7 @@
                             <td><span>Q</span><?php echo $mostrar['montoConDescuento']; ?></td>
                             <td><span>Q</span><?php echo $totalAPagar; ?></td>
                             <td class="fw-bold"><?php echo $mostrar['numeroComprobantePago']; ?></td>
-                            <td><button class="btn btn-danger" type="submit">Borrar</button></td>
+                            <td><a href="multas-pagadas?borrarMulta&IDB=<?php echo $idMulta; ?>" class="btn btn-danger" name="borrarMulta">Borrar</a></td>
                         </tr>
             </tbody>
     <?php
@@ -96,3 +98,11 @@
     ?>
         </table>
     </div>
+
+    <?php
+
+    if (isset($_GET["borrarMulta"])) {
+        include("../../../../business/admin/reportes/multasPagadas/delete-m.php");
+    }
+
+    ?>
