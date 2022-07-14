@@ -34,7 +34,8 @@
 
 
                 $result = mysqli_query($conexion, $sql);
-                while (mysqli_next_result($conexion)) {;}
+                while (mysqli_next_result($conexion)) {;
+                }
 
                 $numero_filas = mysqli_num_rows($result);
 
@@ -66,20 +67,83 @@
                     $totalAPagar = $mostrar['montoInfraccion'] - $mostrar['montoConDescuento'];
 
                 ?>
-                    <tr>
-                        <td><?php echo $tipop, "-", $numerop; ?></td>
-                        <td><?php echo strtoupper($mostrar['marca']); ?></td>
-                        <td><?php echo strtoupper($mostrar['color']); ?></td>
-                        <td><?php echo strtoupper($mostrar['fechaMulta']); ?></td>
-                        <td><?php echo strtoupper($mostrar['lugarInfraccion']); ?></td>
-                        <td><?php echo strtoupper($mostrar['nombreTipoMulta']); ?></td>
-                        <td><span>Q</span><?php echo $mostrar['montoInfraccion']; ?></td>
-                        <td><span>Q</span><?php echo $mostrar['montoConDescuento']; ?></td>
-                        <td><span>Q</span><?php echo $totalAPagar; ?></td>
-                        <td><?php echo $mostrar['estadoDeLaMulta']; ?></td>
-                        <td><button class="btn btn-secondary" type="submit">Generar Boleta</button></td>
-                        <td><button class="btn btn-success" type="submit">Pagar</button></td>
-                        <td><button class="btn btn-danger" type="submit">Borrar</button></td>
+                    <td hidden><?php echo $idMulta; ?></td>
+                    <td><?php echo $tipop, "-", $numerop; ?></td>
+                    <td><?php echo strtoupper($mostrar['marca']); ?></td>
+                    <td><?php echo strtoupper($mostrar['color']); ?></td>
+                    <td><?php echo strtoupper($mostrar['fechaMulta']); ?></td>
+                    <td><?php echo strtoupper($mostrar['lugarInfraccion']); ?></td>
+                    <td><?php echo strtoupper($mostrar['nombreTipoMulta']); ?></td>
+                    <td><span>Q</span><?php echo $mostrar['montoInfraccion']; ?></td>
+                    <td><span>Q</span><?php echo $mostrar['montoConDescuento']; ?></td>
+                    <td><span>Q</span><?php echo $totalAPagar; ?></td>
+                    <td>
+                        <form action="../../../boleta-multa" method="POST" target="_blank">
+                            <input type="text" value="<?php echo $tipop; ?>" name="tipoPc" required hidden>
+                            <input type="text" value="<?php echo $numerop; ?>" name="numeroPlaca" required hidden>
+                            <button type="submit" class="btn btn-secondary">Generar Boleta</button>
+                        </form>
+                    </td>
+                    <!-- Modal pagar multa -->
+                    <div class="modal fade" id="pagarUnaMulta" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Pago de Multa</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="" method="GET">
+                                        <div class="col-md-12 mt-4">
+                                            <?php
+
+                                            $comprobante = $_GET['comprobantePago'];
+
+                                            ?>
+                                            <label for="inputP4" class="form-label">Comprobante de Pago</label>
+                                            <?php
+
+                                            if ($comprobante == "") {
+                                            ?>
+                                                <input type="text" class="form-control" name="comprobantePago" oninput="javascript: if (this.value.length > this.maxLength) 
+                                                this.value = this.value.slice(0, this.maxLength);" style="text-transform:uppercase" maxlength="20" placeholder="XXXXXXXXXX" required>
+                                                <button type="submit" class="btn btn-success mt-2">Guardar para Pagar</button>
+                                            <?php
+                                            } else {
+                                            ?>
+                                                <input type="text" class="form-control" name="comprobantePago" value="<?php echo $comprobante; ?>" readonly required>
+                                            <?php
+                                            }
+                                            ?>
+                                        </div>
+                                    </form>
+                                    <div class="col-md-12 mt-2 mb-3">
+
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <!-- vacio -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+
+                    if ($comprobante == "") {
+                    ?>
+                        <td><button type="submit" class="btn btn-success" data-toggle="modal" data-target="#pagarUnaMulta">Pagar</button></td>
+                        <td><a href="multas-pendientes-pago?borrarMulta&IDB=<?php echo $idMulta; ?>" class="btn btn-danger" name="borrarMulta">Borrar</a></td>
+                    <?php
+                    } else {
+                    ?>
+                        <td><a href="multas-pendientes-pago?pagarMulta&ID=<?php echo $idMulta; ?>&comprobantePago=<?php echo $comprobante; ?>" class="btn btn-success" name="pagarMulta">Finalizar Pago</a></td>
+                        <td><a href="multas-pendientes-pago?borrarMulta&IDB=<?php echo $idMulta; ?>" class="btn btn-danger" name="borrarMulta">Borrar</a></td>
+                    <?php
+                    }
+
+                    ?>
                     </tr>
             </tbody>
         <?php
@@ -89,3 +153,14 @@
         ?>
         </table>
     </div>
+
+    <?php
+
+    if (isset($_GET["pagarMulta"])) {
+        include("../../../../business/admin/reportes/pendientePagos/pay-m.php");
+    }
+
+    if (isset($_GET["borrarMulta"])) {
+        include("../../../../business/admin/reportes/pendientePagos/delete-m.php");
+    }
+    ?>

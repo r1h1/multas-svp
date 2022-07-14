@@ -1,18 +1,20 @@
 <?php
 
-    error_reporting(0);
-    include("../../../../data/conexion-bd.php");
+error_reporting(0);
+include("../../../../data/conexion-bd.php");
 
-    $sComprobante = $_GET['comprobantePago'];
+$sIdMulta = $_GET['ID'];
 
-    $sql = "call pagarUnaMulta('$idMulta','$sComprobante');";
+$sComprobante = $_GET['comprobantePago'];
 
-    $result = mysqli_query($conexion, $sql);
-    while (mysqli_next_result($conexion)) {;
-    }
+$sql = "call pagarUnaMulta('$sIdMulta','$sComprobante');";
 
-    if($result == 1){
-        echo "<script>
+$result = mysqli_query($conexion, $sql);
+while (mysqli_next_result($conexion)) {;
+}
+
+if ($result == 1) {
+    echo "<script>
         Swal.fire({
             icon: 'success',
             title: 'Operación Exitosa',
@@ -23,22 +25,21 @@
             }
           })
         </script>";
-    }
-    else{
-        echo "<script>
+} else {
+    echo "<script>
         Swal.fire({
           icon: 'error',
           title: 'Error no manejado, falló operación'
         })
         </script>";
-    }
+}
 
-    clearstatcache();
+clearstatcache();
 
 ?>
 
 <script>
-    function recargar(){
-        window.location.href='multas-pendientes-pago';
+    function recargar() {
+        window.location.href = 'multas-pendientes-pago';
     }
 </script>
