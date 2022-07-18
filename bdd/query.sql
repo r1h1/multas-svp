@@ -362,6 +362,20 @@ DELIMITER ;
 
 
 
+-- procedimiento para obtener el total a pagar cuando hay más de una multa
+DELIMITER //
+CREATE OR REPLACE PROCEDURE obtenerTotalAPagarPorMultasXPlaca(
+    IN ptipoPlaca varchar(10),
+    IN pnumeroPlaca varchar(12)
+)
+BEGIN
+	SELECT tipoPlaca,numeroPlaca,nombreTipoMulta,sum(montoInfraccion - montoConDescuento) as total_a_pagar_multas 
+    FROM `svp_multas_registradas` INNER JOIN svp_tipos_de_multas ON idTipoMultaFk = idTipoMulta 
+    WHERE tipoPlaca = ptipoPlaca AND numeroPlaca = pnumeroPlaca AND estadoDeLaMulta = 'PENDIENTE' ORDER BY fechaMulta ASC;
+END //
+DELIMITER ;
+
+
 
 -- fin del script
 

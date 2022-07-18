@@ -61,15 +61,17 @@ $horaIngreso = date('h:i:s a', time());
         <br>
         <p class="h6">Fecha de Generación: <?php echo $fechaDeIngreso ?></p>
         <p class="h6">Hora de Generación: <?php echo $horaIngreso ?></p>
+        <p class="h7 mt-5">"La educación víal debe formar parte de tu dia a dia".</p>
 
         <div class="row my-5 text-center mt-5">
             <table class="table table-borderless factura">
                 <thead>
                     <tr>
+                        <th scope="col">#</th>
+                        <th>INFRACCIÓN</th>
                         <th>PLACA</th>
-                        <th>MARCA</th>
-                        <th>MONTO</th>
-                        <th>DESCUENTO</th>
+                        <th>MARCA Y LÍNEA</th>
+                        <th>MONTO CON DESCUENTO</th>
                     </tr>
                 </thead>
                 <?php
@@ -89,21 +91,40 @@ $horaIngreso = date('h:i:s a', time());
                 while ($mostrar = mysqli_fetch_array($result)) {
 
                     $totalAPagar = $mostrar['montoInfraccion'] - $mostrar['montoConDescuento'];
+                    $i = $i + 1;
+                    $montoConDescuento = $mostrar['montoInfraccion'] - $mostrar['montoConDescuento'];
                 ?>
-                    <tbody>
+                    <tbody">
                         <tr>
-                            <td class="fw-bold"><b><?php echo $sTipoPlaca, "-", $sNumeroPlaca; ?></b></td>
+                            <td scope="col"><?php echo $i; ?></td>
+                            <td class="fw-bold"><b><?php echo $mostrar['nombreTipoMulta']; ?><b></td>
+                            <td><?php echo $sTipoPlaca, "-", $sNumeroPlaca; ?></td>
                             <td><?php echo $mostrar['marca']; ?></td>
-                            <td><span>Q</span><?php echo $mostrar['montoInfraccion']; ?></td>
-                            <td><span>Q</span><?php echo $mostrar['montoConDescuento']; ?></td>
+                            <td><span>Q</span><?php echo  $montoConDescuento?></td>
                         </tr>
                     </tbody>
+
+                <?php
+                }
+                ?>
+                <?php
+
+                $sql2 = "CALL obtenerTotalAPagarPorMultasXPlaca('$sTipoPlaca','$sNumeroPlaca');";
+                $result2 = mysqli_query($conexion, $sql2);
+                while (mysqli_next_result($conexion)) {;
+                }
+
+                while ($mostrar2 = mysqli_fetch_array($result2)) {
+                    $totalAPagarMultas = $mostrar2['total_a_pagar_multas'];                    
+                    $totalAPagarMultas = number_format($totalAPagarMultas, 2);
+                ?>
                     <tfoot>
                         <tr>
                             <th></th>
                             <th></th>
+                            <th></th>
                             <th>TOTAL A PAGAR</th>
-                            <th><span>Q</span><?php echo $totalAPagar ?></th>
+                            <th><span>Q</span><?php echo  $totalAPagarMultas?></th>
                         </tr>
                     </tfoot>
                 <?php

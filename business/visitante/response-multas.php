@@ -9,33 +9,126 @@
                         <th scope="col">MARCA</th>
                         <th scope="col">COLOR</th>
                     </tr>
-                    <?php
+                </thead>
+                <?php
 
 
-                    include("../data/conexion-bd.php");
+                include("../data/conexion-bd.php");
 
 
-                    $sNumeroPlaca = $_POST["numeroPlaca"];
-                    $sNumeroPlaca = strtoupper($sNumeroPlaca);
+                $sNumeroPlaca = $_POST["numeroPlaca"];
+                $sNumeroPlaca = strtoupper($sNumeroPlaca);
 
-                    $sTipoDePlaca = $_POST["placaTipo"];
+                $sTipoDePlaca = $_POST["placaTipo"];
 
-                    if($sNumeroPlaca == ''){
-                        echo "<script>
+                if ($sNumeroPlaca == '') {
+                    echo "<script>
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
                             text: 'Para ver las multas, debe primero consultar la placa.'
                           })
                     </script>";
-                    }
-                    else{
+                } else {
 
                     $sql = "CALL verMultasPorPlaca('$sTipoDePlaca','$sNumeroPlaca');";
 
 
                     $result = mysqli_query($conexion, $sql);
-                    while (mysqli_next_result($conexion)) {;}
+                    while (mysqli_next_result($conexion)) {;
+                    }
+                    $numero_filas = mysqli_num_rows($result);
+
+                    if ($numero_filas == 0) {
+                        $existeMulta == 0;
+                        echo "<script>
+                        Swal.fire({
+                            icon: 'success',
+                            title: '¡Felicidades!',
+                            text: '$sTipoDePlaca-$sNumeroPlaca no tiene ninguna multa pendiente.'
+                          })
+                    </script>";
+                    } else {
+                        $existeMulta == 1;
+                        echo "<script>
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'info',
+                            title: 'Se encontró una multa',
+                            showConfirmButton: false,
+                            timer: 1000
+                          })
+                        </script>";
+                    }
+
+                    while ($mostrar = mysqli_fetch_array($result)) {
+
+                        $marca = $mostrar['marca'];
+                        $color = $mostrar['color'];
+
+                        $marca =  strtoupper($marca);
+                        $color =  strtoupper($color);
+                    }
+
+
+                ?>
+                    <tbody>
+                        <tr>
+                            <td class="fw-bold text-decoration-underline"><?php echo $sTipoDePlaca, "-", $sNumeroPlaca; ?></td>
+                            <td><?php echo $marca; ?></td>
+                            <td><?php echo $color; ?></td>
+                        </tr>
+                    </tbody>
+                <?php
+
+                }
+
+                ?>
+            </table>
+        </div>
+    </section>
+    <section class="mt-5 detalle-infraccion">
+        <p class="h2-estilo fw-bold">Detalle de las Infracciones</p>
+        <div class="tabla-info-vehiculo table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">FECHA</th>
+                        <th scope="col">LUGAR</th>
+                        <th scope="col">INFRACCIÓN</th>
+                        <th scope="col">MONTO</th>
+                        <th scope="col">DESCUENTO</th>
+                        <th scope="col">TOTAL A PAGAR</th>
+                    </tr>
+                </thead>
+                <?php
+
+
+                include("../data/conexion-bd.php");
+
+
+                $sNumeroPlaca = $_POST["numeroPlaca"];
+                $sNumeroPlaca = strtoupper($sNumeroPlaca);
+
+                $sTipoDePlaca = $_POST["placaTipo"];
+
+                if ($sNumeroPlaca == '') {
+                    echo "<script>
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Para ver las multas, debe primero consultar la placa.'
+                          })
+                    </script>";
+                } else {
+
+                    $sql = "CALL verMultasPorPlaca('$sTipoDePlaca','$sNumeroPlaca');";
+
+
+                    $result = mysqli_query($conexion, $sql);
+                    while (mysqli_next_result($conexion)) {;
+                    }
                     $numero_filas = mysqli_num_rows($result);
 
                     if ($numero_filas == 0) {
@@ -51,7 +144,7 @@
                         Swal.fire({
                             position: 'top-end',
                             icon: 'info',
-                            title: 'Se encontró una multa',
+                            title: 'Se encontraron multas',
                             showConfirmButton: false,
                             timer: 1000
                           })
@@ -74,51 +167,28 @@
                         $marca =  strtoupper($marca);
                         $color =  strtoupper($color);
                         $lugar =  strtoupper($lugar);
+                        $i = $i + 1;
 
-                    ?>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="fw-bold text-decoration-underline"><?php echo $sTipoDePlaca, "-", $sNumeroPlaca; ?></td>
-                        <td><?php echo $marca; ?></td>
-                        <td><?php echo $color; ?></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-    <section class="mt-5 detalle-infraccion">
-        <p class="h2-estilo fw-bold">Detalle de la infracción</p>
-        <div class="tabla-info-vehiculo table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th scope="col">FECHA</th>
-                        <th scope="col">LUGAR</th>
-                        <th scope="col">INFRACCIÓN</th>
-                        <th scope="col">MONTO</th>
-                        <th scope="col">DESCUENTO</th>
-                        <th scope="col">TOTAL A PAGAR</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><?php echo $mostrar['fechaMulta']; ?></td>
-                        <td><?php echo $lugar; ?></td>
-                        <td class="fw-bold text-decoration-underline"><?php echo $mostrar['nombreTipoMulta']; ?></td>
-                        <td><span>Q</span><?php echo $mostrar['montoInfraccion']; ?></td>
-                        <td><span>Q</span><?php echo $mostrar['montoConDescuento']; ?></td>
-                        <td><span>Q</span><?php echo $totalAPagar; ?></td>
-                    </tr>
-                </tbody>
-            <?php
+                ?>
+                        <tbody>
+                            <tr>
+                                <td><?php echo $i; ?></td>
+                                <td><?php echo $mostrar['fechaMulta']; ?></td>
+                                <td><?php echo $lugar; ?></td>
+                                <td class="fw-bold text-decoration-underline"><?php echo $mostrar['nombreTipoMulta']; ?></td>
+                                <td><span>Q</span><?php echo $mostrar['montoInfraccion']; ?></td>
+                                <td><span>Q</span><?php echo $mostrar['montoConDescuento']; ?></td>
+                                <td><span>Q</span><?php echo $totalAPagar; ?></td>
+                            </tr>
+                        </tbody>
+                <?php
 
                     }
                 }
 
-                    clearstatcache();
+                clearstatcache();
 
-            ?>
+                ?>
             </table>
             <div class="mt-2">
                 <form action="../views/boleta-multa" method="POST" target="_blank">
