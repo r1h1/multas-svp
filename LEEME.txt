@@ -1,0 +1,1 @@
+Esta versión corrije errores encontrados durante QA

@@ -1,0 +1,93 @@
+/* Tipografia */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+/* Margenes y Paddings iniciales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilos de texto */
+.h1-estilo {
+  font-weight: 600;
+  color: #223475;
+  font-size: 34px;
+}
+
+.p-estilo {
+  color: #8e8e8e;
+  font-size: 15px;
+}
+
+.carrito-logo{
+  font-size: 110px;
+  margin-right: 40px;
+}
+
+label {
+  font-weight: 600;
+  color: #223475;
+  font-size: 18px;
+}
+
+/* Estructura */
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+main {
+  margin-top: 75px;
+}
+
+section {
+  height: 180px;
+}
+
+footer {
+  margin-top: 85px;
+}
+
+footer p {
+  text-decoration: none;
+  color: #ffffff;
+  margin-top: 80px;
+}
+
+footer a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+footer a:hover {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+@media only screen and (max-width: 767px) {
+  footer {
+    margin-top: 150px;
+  }
+
+  .carrito-logo{
+    font-size: 108px;
+  }
+
+  
+.h1-estilo {
+    font-weight: 600;
+    color: #223475;
+    font-size: 30px;
+  }
+  
+  .p-estilo {
+    color: #8e8e8e;
+    font-size: 16px;
+  }
+  
+  label {
+    font-weight: 600;
+    color: #223475;
+    font-size: 16px;
+  }
+}

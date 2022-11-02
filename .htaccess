@@ -1,0 +1,38 @@
+#Evitar escribir .php al final de cada URL
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+RewriteRule ^([^\.]+)$ $1.html [NC,L]
+
+
+#------------------------------------------------------
+
+
+ErrorDocument 404 /sm/404.html
+
+
+#------------------------------------------------------
+
+
+#prevenir acceso a los archivos .htaccess
+
+<files .htaccess>
+
+order allow,deny
+
+deny from all
+
+</files>
+
+
+#------------------------------------------------------
+
+
+#Cache de imágenes en el navegador durante un mes
+
+<FilesMatch "\.(ico|jpg|jpeg|png|gif)$">
+
+Header set Cache-Control "max-age=2592000, public"
+
+</FilesMatch>

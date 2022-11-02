@@ -1,0 +1,91 @@
+/* Tipografia */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+/* Margenes y Paddings iniciales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilos de texto */
+.h1-estilo {
+  font-size: 30px;
+  margin-top: 50px;
+}
+
+.p-estilo {
+  font-size: 14px;
+}
+
+.carrito-logo {
+  font-size: 90px;
+  margin-right: 40px;
+}
+
+label {
+  font-size: 17px;
+}
+
+/* Estructura */
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+main {
+  margin-top: 75px;
+}
+
+section {
+  height: 180px;
+}
+
+footer {
+  margin-top: 85px;
+}
+
+footer p {
+  text-decoration: none;
+  color: #ffffff;
+  margin-top: 80px;
+}
+
+footer a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+footer a:hover {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+
+
+@media only screen and (max-width: 790px) {
+  footer {
+    margin-top: 150px;
+  }
+
+  .carrito-logo {
+    font-size: 108px;
+  }
+
+  .h1-estilo {
+    font-size: 30px;
+  }
+
+  .p-estilo {
+    font-size: 16px;
+  }
+
+  label {
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  .footer-spacings{
+    margin-top: 560px;
+    font-size: 14px;
+  }
+}
