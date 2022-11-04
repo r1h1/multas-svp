@@ -106,6 +106,9 @@ clearstatcache();
                             text: '$sTipoDePlaca-$sNumeroPlaca no tiene ninguna multa pendiente.'
                           })
                     </script>";
+
+                    $boleta = 0;
+
                 } else {
                     echo "<script>
                         Swal.fire({
@@ -117,6 +120,8 @@ clearstatcache();
                           });
 			window.location.href='#detalleMultas';
                         </script>";
+
+                    $boleta = 1;
                 }
 
 
@@ -164,7 +169,15 @@ clearstatcache();
         <form action="../../boleta-multa" method="POST" target="_blank" class="mb-5">
             <input type="text" value="<?php echo $sTipoDePlaca; ?>" name="tipoPc" required hidden>
             <input type="text" value="<?php echo $sNumeroPlaca; ?>" name="numeroPlaca" required hidden>
-            <button type="submit" class="btn btn-success">Generar Boleta</button>
+            <?php
+                    if($boleta == 1){
+                    ?>
+                        <button type="submit" class="btn btn-success">Generar Boleta</button>
+                    <?php
+                    }
+                    else{
+                    }
+            ?>
             <a href="consulta-remisiones" class="btn btn-warning">Limpiar</a>
         </form>
 </section>

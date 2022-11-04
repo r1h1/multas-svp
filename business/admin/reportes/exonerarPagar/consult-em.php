@@ -11,7 +11,6 @@
                     <th scope="col">LUGAR</th>
                     <th scope="col">INFRACCION</th>
                     <th scope="col">MONTO</th>
-                    <th scope="col">DESCUENTO</th>
                     <th scope="col">TOTAL</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
@@ -60,7 +59,6 @@
                         <td><?php echo strtoupper($mostrarmpp['lugarInfraccion']); ?></td>
                         <td><?php echo strtoupper($mostrarmpp['nombreTipoMulta']); ?></td>
                         <td><span>Q</span><?php echo $mostrarmpp['montoInfraccion']; ?></td>
-                        <td><span>Q</span><?php echo $mostrarmpp['montoConDescuento']; ?></td>
                         <td><span>Q</span><?php echo $totalAPagar; ?></td>
                         <td><a href="exonerar-multas?exonerarMulta&IDE=<?php echo $idMulta; ?>" class="btn btn-success" name="exonerarMulta">Exonerar</a></td>
                         <td><a href="exonerar-multas?borrarMulta&IDB=<?php echo $idMulta; ?>" class="btn btn-danger" name="borrarMulta">Borrar</a></td>

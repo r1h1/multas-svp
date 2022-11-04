@@ -11,7 +11,6 @@
                     <th scope="col">LUGAR</th>
                     <th scope="col">INFRACCION</th>
                     <th scope="col">MONTO</th>
-                    <th scope="col">DESCUENTO</th>
                     <th scope="col">TOTAL</th>
                     <th scope="col">COMPROBANTE DE PAGO</th>
                     <th scope="col"></th>
@@ -59,7 +58,6 @@
                         <td><?php echo strtoupper($mostrarmpp['lugarInfraccion']); ?></td>
                         <td><?php echo strtoupper($mostrarmpp['nombreTipoMulta']); ?></td>
                         <td><span>Q</span><?php echo $mostrarmpp['montoInfraccion']; ?></td>
-                        <td><span>Q</span><?php echo $mostrarmpp['montoConDescuento']; ?></td>
                         <td><span>Q</span><?php echo $totalAPagar; ?></td>
                         <td class="fw-bold"><?php echo $mostrarmpp['numeroComprobantePago']; ?></td>
                         <td><a href="multas-pagadas?borrarMulta&IDB=<?php echo $idMulta; ?>" class="btn btn-danger" name="borrarMulta" id="btnBorrar">Borrar</a></td>

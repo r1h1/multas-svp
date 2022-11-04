@@ -138,6 +138,9 @@
                             text: '$sTipoDePlaca-$sNumeroPlaca no tiene ninguna multa pendiente.'
                           })
                     </script>";
+
+                    $boleta = 0;
+
                     } else {
                         echo "<script>
                         Swal.fire({
@@ -148,6 +151,9 @@
                             timer: 1000
                           })
                         </script>";
+
+                    $boleta = 1;
+
                     }
 
 
@@ -193,7 +199,15 @@
                 <form action="../views/boleta-multa" method="POST" target="_blank">
                     <input type="text" value="<?php echo $sTipoDePlaca; ?>" name="tipoPc" required hidden>
                     <input type="text" value="<?php echo $sNumeroPlaca; ?>" name="numeroPlaca" required hidden>
-                    <button type="submit" class="btn btn-success">Generar Boleta</button>
+                    <?php
+                    if($boleta == 1){
+                    ?>
+                        <button type="submit" class="btn btn-success">Generar Boleta</button>
+                    <?php
+                    }
+                    else{
+                    }
+                    ?>
                 </form>
             </div>
     </section>
